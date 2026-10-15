@@ -1,0 +1,161 @@
+---
+// ModalSkills - Skills showcase modal with articles/principles
+---
+
+<div 
+  class="modal-overlay" 
+  x-show="showSkillsModal"
+  @click.self="closeAllModals()"
+  x-transition:enter="transition ease-out duration-300"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition ease-in duration-200"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+  style="display: none;"
+>
+  <div class="modal-content">
+    <button class="modal-close-btn" @click="closeAllModals()" aria-label="Close modal">×</button>
+    
+    <div class="modal-header">
+      <h2 class="modal-title">The Penal Code: Skills & Principles</h2>
+      <p class="modal-subtitle">Articles of Software Craftsmanship</p>
+    </div>
+
+    <div class="modal-body">
+      <!-- Article I -->
+      <div class="article-card">
+        <h3 class="article-title">Article I: QA Automation & Test Rigor</h3>
+        <p class="article-text">
+          Unit, integration, and E2E testing using Jest, Cypress, and Appium. Zero untested critical user journeys allowed into staging.
+        </p>
+      </div>
+
+      <!-- Article II -->
+      <div class="article-card">
+        <h3 class="article-title">Article II: Secure Backend & Architecture (Laravel)</h3>
+        <p class="article-text">
+          Clean MVC/DDD patterns, optimized Eloquent queries, robust middleware authentication, and database schema migrations.
+        </p>
+      </div>
+
+      <!-- Article III -->
+      <div class="article-card">
+        <h3 class="article-title">Article III: Cross-Platform Fluidity (React Native)</h3>
+        <p class="article-text">
+          High performance mobile interfaces with offline caching, responsive layouts, native device bridge integrations.
+        </p>
+      </div>
+
+      <!-- Article IV -->
+      <div class="article-card">
+        <h3 class="article-title">Article IV: Offensive Security & Web Pentesting</h3>
+        <p class="article-text">
+          Active vulnerability discovery, OWASP compliance checking, Burp Suite intercepting, privilege escalation mitigation.
+        </p>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-court" @click="closeAllModals()">
+        Acknowledged
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--color-gold);
+  }
+
+  .modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-burgundy);
+    margin: 0 0 8px 0;
+    letter-spacing: 0.05em;
+    font-family: 'Georgia', serif;
+  }
+
+  .modal-subtitle {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--color-ink-light);
+    margin: 0;
+  }
+
+  .modal-body {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .article-card {
+    background: rgba(245, 230, 211, 0.5);
+    border: 2px solid var(--color-gold);
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .article-card:hover {
+    background: rgba(245, 230, 211, 0.8);
+    box-shadow: 0 4px 12px rgba(200, 150, 12, 0.2);
+    transform: translateX(4px);
+  }
+
+  .article-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--color-burgundy);
+    margin: 0 0 8px 0;
+    font-family: 'Georgia', serif;
+  }
+
+  .article-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-parchment-dark);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .modal-title {
+      font-size: 20px;
+    }
+
+    .modal-subtitle {
+      font-size: 13px;
+    }
+
+    .article-card {
+      padding: 14px;
+    }
+
+    .article-title {
+      font-size: 15px;
+    }
+
+    .article-text {
+      font-size: 13px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .modal-body {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

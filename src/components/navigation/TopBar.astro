@@ -1,0 +1,203 @@
+---
+// TopBar - Fixed top navigation with circular buttons and sanity meter
+---
+
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="circle-btn purple-btn" title="Settings" aria-label="Settings">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M10 6C7.79 6 6 7.79 6 10C6 12.21 7.79 14 10 14C12.21 14 14 12.21 14 10C14 7.79 12.21 6 10 6ZM19.43 12.93L17.42 11.74C17.47 11.34 17.5 10.94 17.5 10.5C17.5 10.06 17.47 9.66 17.42 9.26L19.43 8.07C19.62 7.96 19.68 7.7 19.57 7.5L17.67 4.5C17.56 4.3 17.3 4.23 17.1 4.31L14.74 5.38C14.22 4.99 13.65 4.67 13.03 4.44L12.68 2.01C12.65 1.79 12.46 1.61 12.22 1.61H8.22C7.98 1.61 7.79 1.79 7.76 2.01L7.41 4.44C6.79 4.67 6.22 4.99 5.7 5.38L3.34 4.31C3.14 4.23 2.88 4.3 2.77 4.5L0.87 7.5C0.76 7.7 0.82 7.96 1.01 8.07L3.02 9.26C2.97 9.66 2.95 10.06 2.95 10.5C2.95 10.94 2.97 11.34 3.02 11.74L1.01 12.93C0.82 13.04 0.76 13.3 0.87 13.5L2.77 16.5C2.88 16.7 3.14 16.77 3.34 16.69L5.7 15.62C6.22 16.01 6.79 16.33 7.41 16.56L7.76 18.99C7.79 19.21 7.98 19.39 8.22 19.39H12.22C12.46 19.39 12.65 19.21 12.68 18.99L13.03 16.56C13.65 16.33 14.22 16.01 14.74 15.62L17.1 16.69C17.3 16.77 17.56 16.7 17.67 16.5L19.57 13.5C19.68 13.3 19.62 13.04 19.43 12.93Z" fill="currentColor"/>
+      </svg>
+    </button>
+    <button class="circle-btn red-btn" title="Record" aria-label="Record">
+      <div class="record-dot"></div>
+    </button>
+  </div>
+  
+  <div class="topbar-right">
+    <span class="energy-label">SANITY / ENERGY</span>
+    <div class="energy-value">85</div>
+    <div class="energy-bar-container">
+      <div class="energy-bar">
+        <div class="energy-fill" :style="`width: ${sanityLevel}%`"></div>
+      </div>
+    </div>
+    <button class="circle-btn yellow-btn" title="Pause" aria-label="Pause">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <rect x="4" y="2" width="3" height="12" fill="currentColor"/>
+        <rect x="9" y="2" width="3" height="12" fill="currentColor"/>
+      </svg>
+    </button>
+    <button 
+      class="circle-btn red-btn"
+      @click="toggleSound()" 
+      :title="isSoundOn ? 'Sound On' : 'Sound Off'"
+      :aria-label="isSoundOn ? 'Sound On' : 'Sound Off'"
+    >
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" x-show="isSoundOn">
+        <path d="M3 6v6h3l4 4V2L6 6H3zm10 3c0-1.48-.81-2.75-2-3.45v6.9c1.19-.7 2-1.97 2-3.45zm-2-8.28v2.06c2.89.86 5 3.54 5 6.72s-2.11 5.86-5 6.72v2.06c4.01-.91 7-4.49 7-8.78s-2.99-7.87-7-8.78z" fill="currentColor"/>
+      </svg>
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" x-show="!isSoundOn" style="display: none;">
+        <path d="M3 6v6h3l4 4V2L6 6H3zm10.5 3c0-1.48-.81-2.75-2-3.45v6.9c1.19-.7 2-1.97 2-3.45zM11.5.72v2.06c2.89.86 5 3.54 5 6.72s-2.11 5.86-5 6.72v2.06c4.01-.91 7-4.49 7-8.78s-2.99-7.87-7-8.78z" fill="currentColor"/>
+        <line x1="1" y1="1" x2="17" y2="17" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<style>
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(180deg, rgba(61, 40, 23, 0.95) 0%, rgba(61, 40, 23, 0.98) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: var(--z-nav);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .topbar-left,
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .circle-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid var(--color-wood-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    color: white;
+  }
+
+  .circle-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .purple-btn {
+    background: linear-gradient(135deg, #8b6b9e 0%, #6b5080 100%);
+  }
+
+  .red-btn {
+    background: linear-gradient(135deg, #c44e4e 0%, #a03838 100%);
+  }
+
+  .yellow-btn {
+    background: linear-gradient(135deg, #e8c547 0%, #d4b030 100%);
+    color: var(--color-ink);
+  }
+
+  .record-dot {
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+  }
+
+  .energy-label {
+    font-size: 10px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .energy-value {
+    font-size: 11px;
+    color: var(--color-yellow);
+    font-weight: bold;
+    min-width: 20px;
+    text-align: right;
+  }
+
+  .energy-bar-container {
+    width: 100px;
+    padding: 2px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+  }
+
+  .energy-bar {
+    width: 100%;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .energy-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #c44e4e 0%, #e84c6c 100%);
+    transition: width 0.3s ease;
+    border-radius: 6px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .topbar {
+      padding: 0 12px;
+      height: 48px;
+    }
+
+    .circle-btn {
+      width: 32px;
+      height: 32px;
+    }
+
+    .energy-label {
+      display: none;
+    }
+
+    .energy-bar-container {
+      width: 80px;
+    }
+
+    .topbar-left,
+    .topbar-right {
+      gap: 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .topbar {
+      padding: 0 8px;
+    }
+
+    .circle-btn {
+      width: 30px;
+      height: 30px;
+    }
+
+    .circle-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .energy-value {
+      font-size: 10px;
+    }
+
+    .energy-bar-container {
+      width: 60px;
+    }
+
+    .topbar-left,
+    .topbar-right {
+      gap: 6px;
+    }
+  }
+</style>
