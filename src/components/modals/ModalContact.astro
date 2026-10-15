@@ -1,0 +1,218 @@
+---
+// ModalContact - Contact form modal
+---
+
+<div 
+  class="modal-overlay" 
+  x-show="showContactModal"
+  @click.self="closeAllModals()"
+  x-transition:enter="transition ease-out duration-300"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition ease-in duration-200"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+  style="display: none;"
+>
+  <div class="modal-content">
+    <button class="modal-close-btn" @click="closeAllModals()" aria-label="Close modal">×</button>
+    
+    <div class="modal-header">
+      <h2 class="modal-title">SUMMONS & DIRECT CONTACT</h2>
+      <p class="modal-subtitle">Serve The Subpoena: Hire Andriy</p>
+    </div>
+
+    <div class="modal-body">
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Form submission feature coming soon!');">
+        <!-- Name field -->
+        <div class="form-group">
+          <label for="client-name" class="form-label">Prosecutor/Client Name</label>
+          <input 
+            type="text" 
+            id="client-name" 
+            name="name" 
+            class="form-input" 
+            placeholder="Enter your name"
+            required
+          />
+        </div>
+
+        <!-- Email field -->
+        <div class="form-group">
+          <label for="client-email" class="form-label">Contact Email</label>
+          <input 
+            type="email" 
+            id="client-email" 
+            name="email" 
+            class="form-input" 
+            placeholder="your.email@example.com"
+            required
+          />
+        </div>
+
+        <!-- Message field -->
+        <div class="form-group">
+          <label for="project-details" class="form-label">Project Details/Charges</label>
+          <textarea 
+            id="project-details" 
+            name="message" 
+            class="form-textarea" 
+            rows="5" 
+            placeholder="Describe your project, requirements, or the evidence you need examined..."
+            required
+          ></textarea>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn-court submit-btn">
+          DELIVER VERDICT (SEND)
+        </button>
+      </form>
+
+      <!-- Direct contact info -->
+      <div class="direct-contact">
+        <p class="contact-label">Direct Inquiries:</p>
+        <a href="mailto:andriynovanr@gmail.com" class="contact-link">
+          andriynovanr@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--color-gold);
+  }
+
+  .modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-burgundy);
+    margin: 0 0 8px 0;
+    letter-spacing: 0.1em;
+    font-family: 'Georgia', serif;
+  }
+
+  .modal-subtitle {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--color-ink-light);
+    margin: 0;
+  }
+
+  .modal-body {
+    margin-bottom: 0;
+  }
+
+  /* Form styles */
+  .contact-form {
+    margin-bottom: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--color-ink);
+    background: var(--color-cream);
+    border: 2px solid var(--color-wood-dark);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 8px rgba(200, 150, 12, 0.3);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px 24px;
+  }
+
+  /* Direct contact section */
+  .direct-contact {
+    text-align: center;
+    padding: 16px;
+    background: rgba(245, 230, 211, 0.5);
+    border: 2px dashed var(--color-gold);
+    border-radius: 8px;
+  }
+
+  .contact-label {
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--color-ink-light);
+    margin: 0 0 8px 0;
+  }
+
+  .contact-link {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--color-burgundy);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .contact-link:hover {
+    color: var(--color-gold);
+    text-decoration: underline;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .modal-title {
+      font-size: 20px;
+    }
+
+    .modal-subtitle {
+      font-size: 13px;
+    }
+
+    .form-label {
+      font-size: 13px;
+    }
+
+    .form-input,
+    .form-textarea {
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    .submit-btn {
+      font-size: 14px;
+      padding: 12px 20px;
+    }
+
+    .contact-link {
+      font-size: 14px;
+    }
+  }
+</style>

@@ -1,0 +1,167 @@
+---
+// BottomNav - Fixed bottom navigation with modal triggers
+---
+
+<nav class="bottom-nav">
+  <div class="bottom-nav-items">
+    <a href="#hero" class="nav-item">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">HOME</span>
+    </a>
+    
+    <button class="nav-item" @click="openModal('envelope')">
+      <span class="nav-icon">📁</span>
+      <span class="nav-label">CASES</span>
+    </button>
+    
+    <a href="#career" class="nav-item">
+      <span class="nav-icon">📄</span>
+      <span class="nav-label">WRITING</span>
+    </a>
+    
+    <button class="nav-item" @click="openModal('skills')">
+      <span class="nav-icon">📋</span>
+      <span class="nav-label">CV</span>
+    </button>
+    
+    <a href="https://github.com/andriy" target="_blank" rel="noopener noreferrer" class="nav-item">
+      <span class="nav-icon">&lt;/&gt;</span>
+      <span class="nav-label">GITHUB</span>
+    </a>
+    
+    <button class="nav-item verdict-btn" @click="openModal('contact')">
+      <span class="nav-icon">⚖</span>
+      <span class="nav-label">VERDICT</span>
+    </button>
+  </div>
+</nav>
+
+<style>
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-wood-dark);
+    border-top: 2px solid var(--color-gold);
+    z-index: var(--z-nav);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .bottom-nav-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 8px 4px;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    color: var(--color-gold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    min-width: 60px;
+  }
+
+  .nav-item:hover {
+    background: var(--color-wood-mid);
+    transform: translateY(-2px);
+  }
+
+  .nav-icon {
+    font-size: 20px;
+    display: block;
+  }
+
+  .nav-label {
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-gold-light);
+  }
+
+  .verdict-btn {
+    background: var(--color-burgundy);
+    border: 2px solid var(--color-gold);
+    animation: pulse-gold 2s ease-in-out infinite;
+  }
+
+  .verdict-btn:hover {
+    background: var(--color-burgundy-dark);
+    box-shadow: 0 0 16px rgba(255, 215, 0, 0.6);
+  }
+
+  .verdict-btn .nav-icon {
+    font-size: 24px;
+  }
+
+  .verdict-btn .nav-label {
+    color: var(--color-gold-light);
+    font-size: 10px;
+  }
+
+  @keyframes pulse-gold {
+    0%, 100% {
+      box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 16px rgba(255, 215, 0, 0.6);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
+    .bottom-nav-items {
+      padding: 6px 2px;
+    }
+
+    .nav-item {
+      padding: 6px 6px;
+      min-width: 50px;
+      gap: 2px;
+    }
+
+    .nav-icon {
+      font-size: 18px;
+    }
+
+    .nav-label {
+      font-size: 8px;
+    }
+
+    .verdict-btn .nav-icon {
+      font-size: 20px;
+    }
+
+    .verdict-btn .nav-label {
+      font-size: 9px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .nav-item {
+      padding: 10px 16px;
+      min-width: 80px;
+    }
+
+    .nav-icon {
+      font-size: 24px;
+    }
+
+    .nav-label {
+      font-size: 10px;
+    }
+  }
+</style>

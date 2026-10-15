@@ -1,0 +1,154 @@
+---
+// ModalEnvelope - "About me" modal with extended bio
+---
+
+<div 
+  class="modal-overlay" 
+  x-show="showEnvelopeModal"
+  @click.self="closeAllModals()"
+  x-transition:enter="transition ease-out duration-300"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition ease-in duration-200"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+  style="display: none;"
+>
+  <div class="modal-content">
+    <button class="modal-close-btn" @click="closeAllModals()" aria-label="Close modal">×</button>
+    
+    <div class="modal-header">
+      <h2 class="modal-title">OFFICIAL CORRESPONDENCE</h2>
+      <p class="modal-subtitle">From the Desk of Andriy Novan Rahman</p>
+      <div class="modal-stamp">• CLASSIFIED OPENING STATEMENT / APPLICANT DOSSIER •</div>
+    </div>
+
+    <div class="modal-body">
+      <p class="bio-paragraph">
+        Hi! I'm Andriy, a Software Engineering graduate from Telkom University Surabaya. At Minilemon Technology I worked as a QA intern, writing test cases and catching bugs before release on web and mobile apps built with Laravel and React Native.
+      </p>
+
+      <p class="bio-paragraph">
+        My automated regression suite reduced manual smoke testing time by over 40%. On my own time I practice web application penetration testing and bug bounty hunting, and I write up what I learn on my writing page.
+      </p>
+
+      <p class="bio-paragraph">
+        My resume is one click away, and I'm always up for a chat.
+      </p>
+
+      <p class="bio-signature">
+        Respectfully submitted,<br />
+        <strong>Andriy Novan Rahman</strong>
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-court" onclick="alert('Case files feature coming soon!')">
+        Open Case Files →
+      </button>
+      <button class="btn-court" @click="closeAllModals()">
+        Understood
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--color-gold);
+  }
+
+  .modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-burgundy);
+    margin: 0 0 8px 0;
+    letter-spacing: 0.1em;
+    font-family: 'Georgia', serif;
+  }
+
+  .modal-subtitle {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--color-ink-light);
+    margin: 0 0 12px 0;
+  }
+
+  .modal-stamp {
+    font-size: 10px;
+    color: var(--color-burgundy);
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 2px solid var(--color-burgundy);
+    display: inline-block;
+    border-radius: 4px;
+    background: rgba(128, 0, 32, 0.05);
+  }
+
+  .modal-body {
+    margin-bottom: 24px;
+  }
+
+  .bio-paragraph {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--color-ink);
+    margin: 16px 0;
+    text-align: justify;
+  }
+
+  .bio-signature {
+    font-size: 15px;
+    color: var(--color-ink);
+    margin-top: 24px;
+    text-align: right;
+    font-style: italic;
+  }
+
+  .bio-signature strong {
+    font-style: normal;
+    color: var(--color-burgundy);
+  }
+
+  .modal-footer {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-parchment-dark);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .modal-title {
+      font-size: 20px;
+    }
+
+    .modal-subtitle {
+      font-size: 13px;
+    }
+
+    .modal-stamp {
+      font-size: 9px;
+      padding: 5px 10px;
+    }
+
+    .bio-paragraph {
+      font-size: 14px;
+    }
+
+    .modal-footer {
+      flex-direction: column;
+    }
+
+    .modal-footer .btn-court {
+      width: 100%;
+    }
+  }
+</style>
