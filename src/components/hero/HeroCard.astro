@@ -1,225 +1,102 @@
 ---
-// HeroCard - Central hero card with ornate border and confidential stamp
+// HeroCard - Wooden plaque with name
 ---
 
 <section id="hero" class="hero-section">
-  <div class="hero-card card-parchment">
-    <!-- Corner ornaments -->
-    <div class="corner-ornament top-left">✦</div>
-    <div class="corner-ornament top-right">✦</div>
-    <div class="corner-ornament bottom-left">✦</div>
-    <div class="corner-ornament bottom-right">✦</div>
-
-    <!-- Confidential stamp -->
-    <div class="confidential-stamp">
-      <div class="stamp-inner">
-        <div class="monogram">ANR</div>
-        <div class="stamp-text">CONFIDENTIAL</div>
-      </div>
-    </div>
-
-    <!-- Main content -->
-    <div class="hero-content">
+  <div class="hero-plaque">
+    <div class="plaque-inner">
       <h1 class="hero-name">ANDRIY NOVAN RAHMAN</h1>
-      <p class="hero-title">Presiding Officer of Code Integrity & Vulnerability Assessment</p>
-      
-      <div class="hero-divider"></div>
-      
-      <p class="hero-bio">
-        Software QA Engineer | Full-Stack Developer | Penetration Testing Specialist
-      </p>
-      
-      <p class="hero-subtitle">
-        Telkom University Surabaya • Software Engineering Graduate
-      </p>
+      <p class="hero-subtitle">Presiding Officer of Code Integrity & Vulnerability Assessment</p>
     </div>
   </div>
 </section>
 
 <style>
   .hero-section {
-    margin-bottom: 32px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
   }
 
-  .hero-card {
+  .hero-plaque {
+    background: var(--color-tan);
+    border: 6px solid var(--color-wood-dark);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1);
+    max-width: 440px;
+    width: 100%;
     position: relative;
-    text-align: center;
   }
 
-  /* Double border decoration */
-  .hero-card::before {
+  .hero-plaque::before {
     content: '';
     position: absolute;
-    top: 12px;
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    border: 1px solid var(--color-gold);
-    border-radius: 4px;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
     pointer-events: none;
   }
 
-  /* Corner ornaments */
-  .corner-ornament {
-    position: absolute;
-    font-size: 24px;
-    color: var(--color-gold);
-    z-index: 1;
-  }
-
-  .corner-ornament.top-left {
-    top: 8px;
-    left: 8px;
-  }
-
-  .corner-ornament.top-right {
-    top: 8px;
-    right: 8px;
-  }
-
-  .corner-ornament.bottom-left {
-    bottom: 8px;
-    left: 8px;
-  }
-
-  .corner-ornament.bottom-right {
-    bottom: 8px;
-    right: 8px;
-  }
-
-  /* Confidential stamp */
-  .confidential-stamp {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    width: 100px;
-    height: 100px;
-    transform: rotate(-15deg);
-    z-index: 2;
-  }
-
-  .stamp-inner {
-    width: 100%;
-    height: 100%;
-    border: 3px solid var(--color-burgundy);
-    border-radius: 50%;
-    background: rgba(128, 0, 32, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-  }
-
-  .monogram {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--color-burgundy);
-    font-family: 'Georgia', serif;
-    line-height: 1;
-  }
-
-  .stamp-text {
-    font-size: 10px;
-    font-weight: bold;
-    color: var(--color-burgundy);
-    letter-spacing: 0.05em;
-    margin-top: 4px;
-  }
-
-  /* Hero content */
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    padding: 32px 20px;
+  .plaque-inner {
+    background: linear-gradient(135deg, #d4a574 0%, #c9a876 50%, #b8935f 100%);
+    border: 3px solid var(--color-wood-dark);
+    border-radius: 6px;
+    padding: 20px 24px;
+    text-align: center;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
   }
 
   .hero-name {
-    font-size: 32px;
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: 900;
     color: var(--color-ink);
-    letter-spacing: 0.08em;
-    margin: 0 0 16px 0;
-    font-family: 'Georgia', serif;
+    letter-spacing: 1px;
+    margin: 0 0 8px 0;
+    font-family: Arial, sans-serif;
     text-transform: uppercase;
-  }
-
-  .hero-title {
-    font-size: 16px;
-    font-style: italic;
-    color: var(--color-ink-light);
-    margin: 0 0 24px 0;
-    line-height: 1.5;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero-divider {
-    width: 120px;
-    height: 2px;
-    background: var(--color-gold);
-    margin: 24px auto;
-  }
-
-  .hero-bio {
-    font-size: 14px;
-    color: var(--color-ink);
-    margin: 16px 0;
-    font-weight: 600;
+    line-height: 1.2;
   }
 
   .hero-subtitle {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--color-ink-light);
-    margin: 8px 0 0 0;
+    margin: 0;
+    font-style: italic;
+    line-height: 1.4;
   }
 
   /* Responsive adjustments */
   @media (max-width: 640px) {
-    .hero-card {
-      padding: 20px;
+    .hero-plaque {
+      max-width: 90%;
+      border-width: 5px;
     }
 
-    .hero-content {
-      padding: 24px 16px;
+    .plaque-inner {
+      padding: 16px 20px;
     }
 
     .hero-name {
-      font-size: 24px;
-    }
-
-    .hero-title {
-      font-size: 14px;
-    }
-
-    .confidential-stamp {
-      width: 80px;
-      height: 80px;
-      top: 16px;
-      right: 16px;
-    }
-
-    .monogram {
       font-size: 20px;
     }
 
-    .stamp-text {
-      font-size: 8px;
-    }
-
-    .corner-ornament {
-      font-size: 18px;
+    .hero-subtitle {
+      font-size: 11px;
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 641px) and (max-width: 1024px) {
     .hero-name {
-      font-size: 36px;
+      font-size: 26px;
     }
 
-    .hero-title {
-      font-size: 18px;
+    .hero-subtitle {
+      font-size: 13px;
     }
   }
 </style>

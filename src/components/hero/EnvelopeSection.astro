@@ -1,251 +1,269 @@
 ---
-// EnvelopeSection - Large burgundy card with envelope CTA
+// EnvelopeSection - Burgundy card with simple envelope
 ---
 
 <section id="envelope" class="envelope-section">
-  <div class="envelope-card card-burgundy">
-    <!-- Stitched border effect -->
-    <div class="stitched-border">
-      <!-- Confidential stamp in corner -->
-      <div class="small-stamp">CONFIDENTIAL</div>
+  <div class="envelope-card">
+    <div class="envelope-header">
+      <p class="header-line">TO: PROSPECTIVE DOCTOR / CLIENT</p>
+      <p class="header-line">RE: FULL-STACK QA & PENETRATING DOSSIER</p>
+      <p class="header-line">STATUS: EVIDENCE ENCLOSED</p>
+    </div>
 
-      <!-- Header text -->
-      <div class="envelope-header">
-        <p class="to-line">TO: Prospective Court / Client</p>
-        <p class="re-line">RE: Full-Stack QA & Pentesting Dossier</p>
-        <p class="status-line">STATUS: EVIDENCE ENCLOSED</p>
-      </div>
-
-      <!-- Envelope illustration (CSS only) -->
-      <div class="envelope-illustration" @click="openModal('envelope')">
-        <div class="envelope-body">
-          <div class="envelope-flap"></div>
-          <div class="envelope-seal">●</div>
+    <div class="envelope-container" @click="openModal('envelope')">
+      <div class="envelope">
+        <div class="envelope-back"></div>
+        <div class="envelope-front">
+          <div class="envelope-address">
+            <div class="address-line">TO: PROSPECTIVE DOCTOR / CLIENT</div>
+            <div class="address-line">RE: FULL-STACK QA & PENETRATING DOSSIER</div>
+            <div class="address-line">STATUS: EVIDENCE ENCLOSED</div>
+          </div>
         </div>
+        <div class="envelope-flap"></div>
+        <div class="wax-seal"></div>
       </div>
+      <div class="pen-tool"></div>
+    </div>
 
-      <!-- Badge icons row -->
-      <div class="badge-row">
-        <span class="badge-court">QA</span>
-        <span class="badge-court">APP</span>
-        <span class="badge-court">SEC</span>
-      </div>
-
-      <!-- CTA button -->
-      <button class="btn-court envelope-cta" @click="openModal('envelope')">
-        Click the envelope to read opening statement ●
+    <div class="cta-button-container">
+      <button class="cta-text" @click="openModal('envelope')">
+        ● Click the envelope to read opening statement
       </button>
-
-      <!-- Pen illustration -->
-      <div class="pen-illustration"></div>
     </div>
   </div>
 </section>
 
 <style>
   .envelope-section {
-    margin-bottom: 32px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
   }
 
   .envelope-card {
+    background: var(--color-burgundy);
+    border: 6px solid var(--color-wood-dark);
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
     position: relative;
   }
 
-  /* Small confidential stamp */
-  .small-stamp {
+  .envelope-card::before {
+    content: '';
     position: absolute;
-    top: -8px;
-    right: 16px;
-    background: var(--color-burgundy-dark);
-    color: var(--color-gold-light);
-    padding: 4px 12px;
-    font-size: 10px;
-    font-weight: bold;
-    letter-spacing: 0.1em;
-    border: 2px solid var(--color-gold);
-    border-radius: 4px;
-    transform: rotate(5deg);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    border: 2px dashed rgba(212, 165, 116, 0.4);
+    border-radius: 10px;
+    pointer-events: none;
   }
 
-  /* Header text */
   .envelope-header {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     text-align: left;
   }
 
-  .to-line,
-  .re-line,
-  .status-line {
-    margin: 8px 0;
-    font-size: 14px;
+  .header-line {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 4px 0;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.3px;
   }
 
-  .to-line {
-    color: var(--color-gold-light);
-  }
-
-  .re-line {
-    color: var(--color-parchment);
-    font-style: italic;
-  }
-
-  .status-line {
-    color: var(--color-gold);
-    text-transform: uppercase;
-  }
-
-  /* Envelope illustration */
-  .envelope-illustration {
+  .envelope-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 32px 0;
+    margin: 30px 0;
     cursor: pointer;
+    position: relative;
+  }
+
+  .envelope {
+    width: 240px;
+    height: 160px;
+    position: relative;
     transition: transform 0.3s ease;
   }
 
-  .envelope-illustration:hover {
-    transform: scale(1.05);
+  .envelope-container:hover .envelope {
+    transform: translateY(-4px);
   }
 
-  .envelope-body {
-    width: 200px;
-    height: 140px;
-    background: var(--color-parchment);
-    border: 3px solid var(--color-wood-dark);
-    position: relative;
+  .envelope-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #e8e8e8;
+    border: 3px solid var(--color-ink);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .envelope-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border: 3px solid var(--color-ink);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .envelope-address {
+    text-align: center;
+    font-size: 8px;
+    color: var(--color-ink);
+    line-height: 1.6;
+    font-weight: 600;
+  }
+
+  .address-line {
+    margin: 2px 0;
   }
 
   .envelope-flap {
     position: absolute;
-    top: -1px;
-    left: -1px;
-    right: -1px;
-    height: 80px;
-    background: var(--color-parchment-dark);
-    border: 3px solid var(--color-wood-dark);
+    width: 100%;
+    height: 50%;
+    top: 0;
+    left: 0;
+    background: #d0d0d0;
+    border: 3px solid var(--color-ink);
     border-bottom: none;
-    clip-path: polygon(0 0, 50% 60%, 100% 0);
-  }
-
-  .envelope-seal {
-    position: absolute;
-    top: 40px;
-    width: 40px;
-    height: 40px;
-    background: var(--color-burgundy);
-    border: 2px solid var(--color-gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-gold-light);
-    font-size: 24px;
+    clip-path: polygon(0 0, 50% 70%, 100% 0);
     z-index: 2;
   }
 
-  /* Badge row */
-  .badge-row {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin: 24px 0;
-    flex-wrap: wrap;
-  }
-
-  /* CTA button */
-  .envelope-cta {
-    display: block;
-    margin: 24px auto 0 auto;
-    max-width: 100%;
-  }
-
-  /* Pen illustration */
-  .pen-illustration {
+  .wax-seal {
     position: absolute;
-    bottom: 16px;
-    right: 24px;
-    width: 80px;
-    height: 6px;
-    background: linear-gradient(90deg, var(--color-wood-dark) 60%, var(--color-gold) 60%);
-    transform: rotate(-25deg);
-    border-radius: 3px;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #e8b4b8 0%, #d89ca4 50%, #c8848c 100%);
+    border: 2px solid #a86870;
+    border-radius: 50%;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   }
 
-  .pen-illustration::before {
+  .wax-seal::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .pen-tool {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    width: 100px;
+    height: 8px;
+    background: linear-gradient(90deg, var(--color-wood-dark) 0%, var(--color-wood-dark) 70%, var(--color-gold) 70%, var(--color-gold) 100%);
+    border-radius: 4px;
+    transform: translateY(-50%) rotate(-30deg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .pen-tool::after {
     content: '';
     position: absolute;
     right: -8px;
-    top: -4px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 0;
     height: 0;
     border-left: 8px solid var(--color-gold);
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+
+  .cta-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .cta-text {
+    background: none;
+    border: none;
+    color: var(--color-yellow);
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: color 0.2s ease;
+    padding: 8px;
+  }
+
+  .cta-text:hover {
+    color: white;
   }
 
   /* Responsive adjustments */
   @media (max-width: 640px) {
-    .envelope-body {
-      width: 160px;
-      height: 110px;
+    .envelope-card {
+      max-width: 90%;
+      padding: 16px;
     }
 
-    .envelope-flap {
-      height: 65px;
+    .envelope {
+      width: 200px;
+      height: 133px;
     }
 
-    .envelope-seal {
-      top: 32px;
-      width: 32px;
-      height: 32px;
-      font-size: 20px;
+    .wax-seal {
+      width: 35px;
+      height: 35px;
+      top: 42px;
     }
 
-    .to-line,
-    .re-line,
-    .status-line {
+    .pen-tool {
+      width: 80px;
+      right: -10px;
+    }
+
+    .header-line {
+      font-size: 10px;
+    }
+
+    .cta-text {
       font-size: 12px;
-    }
-
-    .pen-illustration {
-      width: 60px;
-      height: 5px;
-      bottom: 12px;
-      right: 16px;
-    }
-
-    .pen-illustration::before {
-      right: -6px;
-      top: -3px;
-      border-left: 6px solid var(--color-gold);
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
     }
   }
 
-  @media (min-width: 768px) {
-    .envelope-body {
-      width: 240px;
-      height: 160px;
+  @media (max-width: 480px) {
+    .envelope {
+      width: 180px;
+      height: 120px;
     }
 
-    .envelope-flap {
-      height: 95px;
+    .wax-seal {
+      width: 32px;
+      height: 32px;
+      top: 38px;
     }
 
-    .envelope-seal {
-      top: 48px;
-      width: 48px;
-      height: 48px;
-      font-size: 28px;
+    .pen-tool {
+      width: 70px;
+      height: 6px;
+      right: -5px;
     }
   }
 </style>

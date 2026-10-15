@@ -1,38 +1,90 @@
 ---
-// BottomNav - Fixed bottom navigation with modal triggers
+// BottomNav - Fixed bottom navigation with wood planks and hire button
 ---
 
 <nav class="bottom-nav">
-  <div class="bottom-nav-items">
-    <a href="#hero" class="nav-item">
-      <span class="nav-icon">🏠</span>
-      <span class="nav-label">HOME</span>
-    </a>
-    
-    <button class="nav-item" @click="openModal('envelope')">
-      <span class="nav-icon">📁</span>
-      <span class="nav-label">CASES</span>
+  <div class="bottom-nav-planks">
+    <div class="plank-item"></div>
+    <div class="plank-item"></div>
+    <div class="plank-item"></div>
+    <div class="plank-item"></div>
+    <div class="plank-item"></div>
+    <div class="plank-item"></div>
+    <div class="plank-item"></div>
+    <div class="plank-item"></div>
+    <div class="plank-item"></div>
+    <div class="plank-item"></div>
+  </div>
+
+  <div class="bottom-nav-content">
+    <div class="nav-items-left">
+      <a href="#hero" class="nav-icon-item">
+        <div class="icon-box home-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="icon-label">HOME</span>
+      </a>
+
+      <button class="nav-icon-item" @click="openModal('envelope')">
+        <div class="icon-box projects-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="icon-label">PROJECTS</span>
+      </button>
+
+      <a href="#career" class="nav-icon-item">
+        <div class="icon-box writing-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="icon-label">WRITING</span>
+      </a>
+
+      <button class="nav-icon-item" @click="openModal('skills')">
+        <div class="icon-box resume-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="icon-label">RESUME</span>
+      </button>
+
+      <a href="https://github.com/andriynovanr" target="_blank" rel="noopener noreferrer" class="nav-icon-item">
+        <div class="icon-box github-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="icon-label">GITHUB</span>
+      </a>
+    </div>
+
+    <button class="hire-me-btn" @click="openModal('contact')">
+      <div class="hire-me-content">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="hire-icon">
+          <path d="M9 12h2V7H9v5zm1-9C5.48 3 2 6.48 2 11s3.48 8 8 8 8-3.48 8-8-3.48-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" fill="currentColor"/>
+        </svg>
+        <span class="hire-me-text">HIRE ME</span>
+      </div>
     </button>
-    
-    <a href="#career" class="nav-item">
-      <span class="nav-icon">📄</span>
-      <span class="nav-label">WRITING</span>
-    </a>
-    
-    <button class="nav-item" @click="openModal('skills')">
-      <span class="nav-icon">📋</span>
-      <span class="nav-label">CV</span>
-    </button>
-    
-    <a href="https://github.com/andriy" target="_blank" rel="noopener noreferrer" class="nav-item">
-      <span class="nav-icon">&lt;/&gt;</span>
-      <span class="nav-label">GITHUB</span>
-    </a>
-    
-    <button class="nav-item verdict-btn" @click="openModal('contact')">
-      <span class="nav-icon">⚖</span>
-      <span class="nav-label">VERDICT</span>
-    </button>
+
+    <div class="nav-items-right">
+      <div class="sidebar-icon left-sidebar">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="8" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="sidebar-icon right-sidebar">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="8" fill="currentColor"/>
+        </svg>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -42,126 +94,250 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--color-wood-dark);
-    border-top: 2px solid var(--color-gold);
     z-index: var(--z-nav);
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.5);
   }
 
-  .bottom-nav-items {
+  .bottom-nav-planks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    z-index: 0;
+  }
+
+  .plank-item {
+    flex: 1;
+    background: linear-gradient(180deg, #7a5030 0%, #6b4423 50%, #5d3820 100%);
+    border-right: 2px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .plank-item:last-child {
+    border-right: none;
+  }
+
+  .bottom-nav-content {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    max-width: 100%;
+    justify-content: space-between;
+    padding: 12px 16px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 8px 4px;
   }
 
-  .nav-item {
+  .nav-items-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-icon-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 4px;
-    padding: 8px 12px;
-    background: transparent;
-    border: none;
-    color: var(--color-gold);
-    text-decoration: none;
     cursor: pointer;
-    transition: all 0.2s ease;
-    border-radius: 6px;
-    min-width: 60px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
   }
 
-  .nav-item:hover {
-    background: var(--color-wood-mid);
+  .nav-icon-item:hover {
     transform: translateY(-2px);
   }
 
-  .nav-icon {
-    font-size: 20px;
-    display: block;
+  .icon-box {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--color-wood-dark);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    color: white;
   }
 
-  .nav-label {
+  .home-icon {
+    background: linear-gradient(135deg, #c44e4e 0%, #a03838 100%);
+  }
+
+  .projects-icon {
+    background: linear-gradient(135deg, #6b4423 0%, #5d3820 100%);
+  }
+
+  .writing-icon {
+    background: linear-gradient(135deg, #4a7c7e 0%, #2d5456 100%);
+  }
+
+  .resume-icon {
+    background: linear-gradient(135deg, #8b6239 0%, #6b4423 100%);
+  }
+
+  .github-icon {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+  }
+
+  .icon-label {
     font-size: 9px;
     font-weight: bold;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--color-gold-light);
+    color: var(--color-tan);
+    letter-spacing: 0.3px;
   }
 
-  .verdict-btn {
-    background: var(--color-burgundy);
-    border: 2px solid var(--color-gold);
-    animation: pulse-gold 2s ease-in-out infinite;
+  .hire-me-btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #d97941 0%, #c46530 100%);
+    border: 4px solid var(--color-wood-dark);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(217, 121, 65, 0.5);
   }
 
-  .verdict-btn:hover {
-    background: var(--color-burgundy-dark);
-    box-shadow: 0 0 16px rgba(255, 215, 0, 0.6);
+  .hire-me-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(217, 121, 65, 0.7);
   }
 
-  .verdict-btn .nav-icon {
-    font-size: 24px;
+  .hire-me-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .verdict-btn .nav-label {
-    color: var(--color-gold-light);
-    font-size: 10px;
+  .hire-icon {
+    color: white;
   }
 
-  @keyframes pulse-gold {
-    0%, 100% {
-      box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+  .hire-me-text {
+    font-size: 14px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-items-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sidebar-icon {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--color-wood-dark);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .left-sidebar {
+    background: linear-gradient(135deg, #8b6b9e 0%, #6b5080 100%);
+    color: white;
+  }
+
+  .right-sidebar {
+    background: linear-gradient(135deg, #4a7c7e 0%, #2d5456 100%);
+    color: white;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .bottom-nav-content {
+      padding: 10px 12px;
     }
-    50% {
-      box-shadow: 0 0 16px rgba(255, 215, 0, 0.6);
-    }
-  }
 
-  /* Responsive adjustments */
-  @media (max-width: 480px) {
-    .bottom-nav-items {
-      padding: 6px 2px;
+    .nav-items-left {
+      gap: 6px;
     }
 
-    .nav-item {
-      padding: 6px 6px;
-      min-width: 50px;
-      gap: 2px;
+    .icon-box {
+      width: 42px;
+      height: 42px;
     }
 
-    .nav-icon {
-      font-size: 18px;
+    .icon-box svg {
+      width: 20px;
+      height: 20px;
     }
 
-    .nav-label {
+    .icon-label {
       font-size: 8px;
     }
 
-    .verdict-btn .nav-icon {
-      font-size: 20px;
+    .hire-me-btn {
+      padding: 10px 20px;
     }
 
-    .verdict-btn .nav-label {
-      font-size: 9px;
+    .hire-me-text {
+      font-size: 13px;
+    }
+
+    .sidebar-icon {
+      width: 42px;
+      height: 42px;
+    }
+
+    .nav-items-right {
+      gap: 8px;
     }
   }
 
-  @media (min-width: 768px) {
-    .nav-item {
-      padding: 10px 16px;
-      min-width: 80px;
+  @media (max-width: 640px) {
+    .bottom-nav-content {
+      padding: 8px 8px;
+      gap: 6px;
     }
 
-    .nav-icon {
-      font-size: 24px;
+    .nav-items-left {
+      gap: 4px;
     }
 
-    .nav-label {
-      font-size: 10px;
+    .icon-box {
+      width: 36px;
+      height: 36px;
+    }
+
+    .icon-box svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .icon-label {
+      font-size: 7px;
+    }
+
+    .hire-me-btn {
+      padding: 8px 16px;
+    }
+
+    .hire-me-text {
+      font-size: 11px;
+    }
+
+    .hire-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .sidebar-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .sidebar-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .nav-items-right {
+      gap: 6px;
     }
   }
 </style>
