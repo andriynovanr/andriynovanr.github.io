@@ -43,6 +43,9 @@
   --container-max: 540px;
   
   /* Z-index layers */
+  --z-background: -10;
+  --z-floor: -5;
+  --z-content: 1;
   --z-nav: 40;
   --z-modal: 50;
 }
@@ -77,6 +80,8 @@ body {
               );
   background-attachment: fixed;
   min-height: 100vh;
+  position: relative;
+  z-index: -1;
 }
 
 /* ============================================
@@ -209,6 +214,8 @@ body {
   max-width: var(--container-max);
   margin: 0 auto;
   min-height: 100vh;
+  position: relative;
+  z-index: var(--z-content);
 }
 
 /* ============================================

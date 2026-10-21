@@ -15,8 +15,137 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Portfolio Andriy Novan Rahman — Software QA Engineer, Full-Stack Developer, Pentester" />
     <title>{title}</title>
+    <style>
+      /* Courtroom Floor & Partition - Fixed Background */
+      .courtroom-floor-bg {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50vh;
+        background: linear-gradient(180deg, #1e535f 0%, #2a6d7c 6px, #2a6d7c 100%);
+        z-index: -10;
+        pointer-events: none;
+      }
+
+      .gallery-partition-bg {
+        position: fixed;
+        bottom: 50vh;
+        left: 0;
+        right: 0;
+        height: 52px;
+        background: #d8ceb7;
+        border-top: 4px solid #1a0f07;
+        border-bottom: 4px solid #140b04;
+        z-index: -10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+      }
+
+      .partition-posts-bg {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        max-width: 1400px;
+        height: 100%;
+      }
+
+      .post-item-bg {
+        width: 13px;
+        height: 34px;
+        background: #bcac91;
+        border: 2px solid #1a0f07;
+        border-radius: 2px;
+      }
+
+      /* Wood Panel Vertikal - Di atas balok krem */
+      .wood-panel-bg {
+        position: fixed;
+        bottom: calc(50vh + 52px);
+        left: 0;
+        right: 0;
+        height: 125px;
+        background: linear-gradient(
+          180deg,
+          #4a210a 0%,
+          #55280e 15%,
+          #6b3314 40%,
+          #743714 60%,
+          #7b3c17 85%,
+          #803f19 100%
+        );
+        z-index: -10;
+        display: flex;
+        align-items: stretch;
+        justify-content: flex-start;
+        pointer-events: none;
+      }
+
+      .wood-plank-line {
+        width: 80px;
+        height: 100%;
+        border-right: 3px solid rgba(60, 30, 12, 0.6);
+        flex-shrink: 0;
+        position: relative;
+      }
+
+      .wood-plank-line::after {
+        content: '';
+        position: absolute;
+        right: -4px;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: rgba(140, 71, 29, 0.3);
+      }
+    </style>
   </head>
   <body x-data="portfolioApp">
+    <!-- Courtroom Floor Background (Fixed) -->
+    <div class="courtroom-floor-bg"></div>
+    <div class="gallery-partition-bg">
+      <div class="partition-posts-bg">
+        <div class="post-item-bg"></div>
+        <div class="post-item-bg"></div>
+        <div class="post-item-bg"></div>
+        <div class="post-item-bg"></div>
+        <div class="post-item-bg"></div>
+        <div class="post-item-bg"></div>
+        <div class="post-item-bg"></div>
+      </div>
+    </div>
+    <!-- Wood Panel Vertikal (Di atas balok krem) -->
+    <div class="wood-panel-bg">
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+      <div class="wood-plank-line"></div>
+    </div>
+    
     <slot />
   </body>
 </html>

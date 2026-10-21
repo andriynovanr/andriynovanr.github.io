@@ -17,63 +17,54 @@
   </div>
 
   <div class="bottom-nav-content">
-    <div class="nav-items-left">
-      <a href="#hero" class="nav-icon-item">
-        <div class="icon-box home-icon">
-          <img src="/icons/icon_home.png" alt="Home" class="nav-icon-img-large" />
-        </div>
-        <span class="icon-label">HOME</span>
-      </a>
+    <div class="nav-items-container">
+      <div class="nav-items-left">
+        <a href="#hero" class="nav-icon-item">
+          <div class="icon-box home-icon">
+            <img src="/icons/icon_home.png" alt="Home" class="nav-icon-img-large" />
+          </div>
+          <span class="icon-label">HOME</span>
+        </a>
 
-      <button class="nav-icon-item" @click="openModal('envelope')">
-        <div class="icon-box projects-icon">
-          <img src="/icons/icon_projects.png" alt="Projects" class="nav-icon-img-xlarge" />
+        <button class="nav-icon-item" @click="openModal('envelope')">
+          <div class="icon-box projects-icon">
+            <img src="/icons/icon_projects.png" alt="Projects" class="nav-icon-img-xlarge" />
+          </div>
+          <span class="icon-label">PROJECTS</span>
+        </button>
+
+        <a href="#career" class="nav-icon-item">
+          <div class="icon-box writing-icon">
+            <img src="/icons/icon_writing.png" alt="Writing" class="nav-icon-img-xlarge" />
+          </div>
+          <span class="icon-label">WRITING</span>
+        </a>
+
+        <button class="nav-icon-item" @click="openModal('skills')">
+          <div class="icon-box resume-icon">
+            <img src="/icons/icon_resume.png" alt="Resume" class="nav-icon-img-xlarge" />
+          </div>
+          <span class="icon-label">RESUME</span>
+        </button>
+
+        <a href="https://github.com/andriynovanr" target="_blank" rel="noopener noreferrer" class="nav-icon-item">
+          <div class="icon-box github-icon">
+            <img src="/icons/icon_github.png" alt="GitHub" class="nav-icon-img-xlarge" />
+          </div>
+          <span class="icon-label">GITHUB</span>
+        </a>
+      </div>
+
+      <!-- Garis Pemisah Vertikal -->
+      <div class="nav-divider">
+        <div class="divider-line"></div>
+      </div>
+
+      <button class="nav-icon-item hire-me-button" @click="openModal('contact')">
+        <div class="hire-me-plaque">
+          <img src="/icons/icon_hireme.png" alt="Hire Me" class="hire-me-icon-img" />
         </div>
-        <span class="icon-label">PROJECTS</span>
       </button>
-
-      <a href="#career" class="nav-icon-item">
-        <div class="icon-box writing-icon">
-          <img src="/icons/icon_writing.png" alt="Writing" class="nav-icon-img-xlarge" />
-        </div>
-        <span class="icon-label">WRITING</span>
-      </a>
-
-      <button class="nav-icon-item" @click="openModal('skills')">
-        <div class="icon-box resume-icon">
-          <img src="/icons/icon_resume.png" alt="Resume" class="nav-icon-img-xlarge" />
-        </div>
-        <span class="icon-label">RESUME</span>
-      </button>
-
-      <a href="https://github.com/andriynovanr" target="_blank" rel="noopener noreferrer" class="nav-icon-item">
-        <div class="icon-box github-icon">
-          <img src="/icons/icon_github.png" alt="GitHub" class="nav-icon-img-xlarge" />
-        </div>
-        <span class="icon-label">GITHUB</span>
-      </a>
-    </div>
-
-    <button class="hire-me-btn" @click="openModal('contact')">
-      <div class="hire-me-content">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="hire-icon">
-          <path d="M9 12h2V7H9v5zm1-9C5.48 3 2 6.48 2 11s3.48 8 8 8 8-3.48 8-8-3.48-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" fill="currentColor"/>
-        </svg>
-        <span class="hire-me-text">HIRE ME</span>
-      </div>
-    </button>
-
-    <div class="nav-items-right">
-      <div class="sidebar-icon left-sidebar">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <circle cx="10" cy="10" r="8" fill="currentColor"/>
-        </svg>
-      </div>
-      <div class="sidebar-icon right-sidebar">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <circle cx="10" cy="10" r="8" fill="currentColor"/>
-        </svg>
-      </div>
     </div>
   </div>
 </nav>
@@ -86,6 +77,7 @@
     right: 0;
     z-index: var(--z-nav);
     box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.5);
+    border-top: 4px solid #1c0e05;
   }
 
   .bottom-nav-planks {
@@ -94,18 +86,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    display: flex;
+    background: linear-gradient(180deg, #562b0e 0%, #4a230b 50%, #421f0a 100%);
     z-index: 0;
   }
 
   .plank-item {
-    flex: 1;
-    background: linear-gradient(180deg, #7a5030 0%, #6b4423 50%, #5d3820 100%);
-    border-right: 2px solid rgba(0, 0, 0, 0.4);
-  }
-
-  .plank-item:last-child {
-    border-right: none;
+    display: none;
   }
 
   .bottom-nav-content {
@@ -113,23 +99,52 @@
     z-index: 1;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
+    justify-content: center;
+    padding: 18px 48px;
     max-width: 1200px;
     margin: 0 auto;
+    min-height: 100px;
+  }
+
+  .nav-items-container {
+    display: flex;
+    align-items: center;
+    gap: 34px;
   }
 
   .nav-items-left {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 26px;
+  }
+
+  /* Garis Pemisah Vertikal */
+  .nav-divider {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 0;
+  }
+
+  .divider-line {
+    width: 4px;
+    height: 50px;
+    position: relative;
+    background: linear-gradient(
+      to right,
+      #2a1205 0px,
+      #2a1205 2.5px,
+      #6e3715 2.5px,
+      #6e3715 4px
+    );
+    border-radius: 2px;
   }
 
   .nav-icon-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 7px;
     cursor: pointer;
     text-decoration: none;
     transition: transform 0.2s ease;
@@ -288,6 +303,13 @@
     transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
+  .nav-icon-img-xxlarge {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
   .home-icon {
     background: transparent;
     box-shadow: none;
@@ -322,6 +344,57 @@
     border-radius: 8px;
   }
 
+  .hireme-icon {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+  }
+
+  /* HIRE ME Plaque Button - Kapsul Plakat Kayu */
+  .hire-me-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+  }
+
+  .hire-me-plaque {
+    width: 180px;
+    height: 72px;
+    background: #9c4c16;
+    border: 5px solid #251205;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 0 #190c03;
+    cursor: pointer;
+    transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    padding: 10px 20px;
+  }
+
+  .hire-me-plaque::before {
+    display: none;
+  }
+
+  .hire-me-icon-img {
+    width: 160px;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .hire-me-button:hover .hire-me-plaque {
+    background: #b2591b;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 0 #190c03;
+  }
+
+  .hire-me-button:hover .hire-me-icon-img {
+    transform: scale(1.05);
+  }
+
   .icon-label {
     font-size: 9px;
     font-weight: bold;
@@ -332,73 +405,19 @@
     transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  .hire-me-btn {
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #d97941 0%, #c46530 100%);
-    border: 4px solid var(--color-wood-dark);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(217, 121, 65, 0.5);
-  }
-
-  .hire-me-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(217, 121, 65, 0.7);
-  }
-
-  .hire-me-content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .hire-icon {
-    color: white;
-  }
-
-  .hire-me-text {
-    font-size: 14px;
-    font-weight: 900;
-    color: white;
-    letter-spacing: 0.5px;
-  }
-
-  .nav-items-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .sidebar-icon {
-    width: 48px;
-    height: 48px;
-    border: 3px solid var(--color-wood-dark);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-  }
-
-  .left-sidebar {
-    background: linear-gradient(135deg, #8b6b9e 0%, #6b5080 100%);
-    color: white;
-  }
-
-  .right-sidebar {
-    background: linear-gradient(135deg, #4a7c7e 0%, #2d5456 100%);
-    color: white;
-  }
-
   /* Responsive */
   @media (max-width: 768px) {
     .bottom-nav-content {
-      padding: 10px 12px;
+      padding: 14px 24px;
+      min-height: 85px;
     }
 
     .nav-items-left {
-      gap: 6px;
+      gap: 20px;
+    }
+
+    .nav-items-container {
+      gap: 28px;
     }
 
     .icon-box {
@@ -415,32 +434,39 @@
       font-size: 8px;
     }
 
-    .hire-me-btn {
-      padding: 10px 20px;
+    .nav-divider {
+      height: 44px;
     }
 
-    .hire-me-text {
-      font-size: 13px;
+    .divider-line {
+      height: 44px;
+      width: 3.5px;
     }
 
-    .sidebar-icon {
-      width: 42px;
-      height: 42px;
+    .hire-me-plaque {
+      width: 150px;
+      height: 60px;
     }
 
-    .nav-items-right {
-      gap: 8px;
+    .hire-me-icon-img {
+      width: 130px;
     }
   }
 
   @media (max-width: 640px) {
     .bottom-nav-content {
-      padding: 8px 8px;
+      padding: 10px 12px;
       gap: 6px;
+      min-height: 75px;
     }
 
     .nav-items-left {
-      gap: 4px;
+      gap: 14px;
+    }
+
+    .nav-items-container {
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     .icon-box {
@@ -457,31 +483,22 @@
       font-size: 7px;
     }
 
-    .hire-me-btn {
-      padding: 8px 16px;
+    .nav-divider {
+      height: 38px;
     }
 
-    .hire-me-text {
-      font-size: 11px;
+    .divider-line {
+      height: 38px;
+      width: 3px;
     }
 
-    .hire-icon {
-      width: 16px;
-      height: 16px;
+    .hire-me-plaque {
+      width: 130px;
+      height: 50px;
     }
 
-    .sidebar-icon {
-      width: 36px;
-      height: 36px;
-    }
-
-    .sidebar-icon svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .nav-items-right {
-      gap: 6px;
+    .hire-me-icon-img {
+      width: 110px;
     }
   }
 </style>
