@@ -1,0 +1,197 @@
+---
+// HangingLamp - Lampu gantung hijau banker's lamp dengan efek sinar cahaya
+---
+
+<div class="hanging-lamp-container" x-data="{ lampOn: true }">
+  <!-- Lapisan 1: Pendaran Cahaya Melingkar Lembut (Ambient Radial Glow) -->
+  <div 
+    class="lamp-ambient-glow" 
+    x-show="lampOn"
+    x-transition:enter="transition ease-out duration-500"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+  ></div>
+
+  <!-- Lapisan 2: Sorot Kerucut Cahaya Bawah (Downward Light Cone) -->
+  <div 
+    class="lamp-downward-cone" 
+    x-show="lampOn"
+    x-transition:enter="transition ease-out duration-500"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+  ></div>
+
+  <!-- Gambar Lampu dengan Rantai Tarikan -->
+  <div class="lamp-fixture" :class="{ 'lamp-off': !lampOn }">
+    <img 
+      src="/icons/icon_lamp.png" 
+      alt="Banker's Hanging Lamp" 
+      class="lamp-image"
+      @click="lampOn = !lampOn"
+      title="Click to toggle lamp"
+    />
+  </div>
+</div>
+
+<style>
+  /* ============================================
+     CONTAINER LAMPU GANTUNG
+     ============================================ */
+  .hanging-lamp-container {
+    position: absolute;
+    top: 0;
+    left: 70px;
+    width: 120px;
+    height: 130px;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  /* ============================================
+     LAPISAN 1: PENDARAN CAHAYA MELINGKAR LEMBUT
+     Ambient Radial Bloom - Menyinari dinding kayu
+     ============================================ */
+  .lamp-ambient-glow {
+    position: absolute;
+    top: 48px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 840px;
+    height: 840px;
+    background: radial-gradient(
+      circle at center,
+      rgba(246, 216, 96, 0.35) 0%,
+      rgba(235, 185, 65, 0.28) 20%,
+      rgba(180, 110, 30, 0.14) 55%,
+      transparent 80%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ============================================
+     LAPISAN 2: SOROT KERUCUT CAHAYA BAWAH
+     Soft Downward Light Cone - Menyinari ke arah bawah
+     ============================================ */
+  .lamp-downward-cone {
+    position: absolute;
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 280px;
+    background: linear-gradient(
+      180deg,
+      rgba(253, 230, 138, 0.22) 0%,
+      rgba(246, 216, 96, 0.12) 50%,
+      rgba(217, 168, 62, 0) 100%
+    );
+    clip-path: polygon(
+      25% 0%,
+      75% 0%,
+      100% 100%,
+      0% 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* ============================================
+     FIXTURE LAMPU (Gambar PNG)
+     ============================================ */
+  .lamp-fixture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 130px;
+    z-index: 3;
+    transition: filter 0.4s ease;
+  }
+
+  /* Efek pendaran saat lampu menyala */
+  .lamp-fixture {
+    filter: drop-shadow(0 0 16px rgba(246, 216, 96, 0.45));
+  }
+
+  /* Efek redup saat lampu mati */
+  .lamp-fixture.lamp-off {
+    filter: drop-shadow(0 0 0 transparent) brightness(0.4) saturate(0.5);
+  }
+
+  .lamp-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .lamp-image:hover {
+    transform: scale(1.03);
+  }
+
+  .lamp-image:active {
+    transform: scale(0.98);
+  }
+
+  /* ============================================
+     RESPONSIVE ADJUSTMENTS
+     ============================================ */
+  @media (max-width: 768px) {
+    .hanging-lamp-container {
+      left: 40px;
+      width: 90px;
+      height: 100px;
+    }
+
+    .lamp-ambient-glow {
+      width: 600px;
+      height: 600px;
+      top: 36px;
+    }
+
+    .lamp-downward-cone {
+      width: 75px;
+      height: 210px;
+      top: 36px;
+    }
+
+    .lamp-fixture {
+      width: 90px;
+      height: 100px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hanging-lamp-container {
+      left: 20px;
+      width: 70px;
+      height: 80px;
+    }
+
+    .lamp-ambient-glow {
+      width: 400px;
+      height: 400px;
+      top: 28px;
+    }
+
+    .lamp-downward-cone {
+      width: 60px;
+      height: 160px;
+      top: 28px;
+    }
+
+    .lamp-fixture {
+      width: 70px;
+      height: 80px;
+    }
+  }
+</style>

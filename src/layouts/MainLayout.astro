@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import HangingLamp from '../components/decoration/HangingLamp.astro';
 
 interface Props {
   title?: string;
@@ -13,35 +14,154 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portfolio Andriy Novan Rahman — Software QA Engineer, Full-Stack Developer, Pentester" />
+    <met name="description" content="Portfolio Andriy Novan Rahman — Software QA Engineer, Full-Stack Developer, Pentester" />
     <title>{title}</title>
     <style>
-      /* Courtroom Floor & Partition - Fixed Background */
-      .courtroom-floor-bg {
-        position: fixed;
-        bottom: 0;
+      /* ============================================
+         SISTEM LAYOUT VERTIKAL COURTROOM - SCROLLABLE
+         Total Height: 1400px (container absolut)
+         ============================================ */
+      
+      /* Wrapper background container */
+      .courtroom-backgrounds-wrapper {
+        position: absolute;
+        top: 0;
         left: 0;
         right: 0;
-        height: 50vh;
-        background: linear-gradient(180deg, #1e535f 0%, #2a6d7c 6px, #2a6d7c 100%);
+        height: 1400px;
         z-index: -10;
         pointer-events: none;
       }
+      
+      /* ZONA 1: Dinding Kayu Atas - Judge Bench Backdrop (0px - 600px, 45.1%) */
+      .courtroom-upper-wall-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 600px;
+        display: flex;
+        align-items: stretch;
+        justify-content: flex-start;
+        overflow: hidden;
+      }
 
+      /* Bilah papan kayu vertikal lebar dengan efek silinder */
+      .upper-wall-plank {
+        width: 145px;
+        height: 100%;
+        flex-shrink: 0;
+        position: relative;
+        background: linear-gradient(
+          to right,
+          #3A1E0B 0%,
+          #42210D 8%,
+          #4F270F 18%,
+          #5A2E12 28%,
+          #613415 40%,
+          #683817 50%,
+          #6D3A18 60%,
+          #613415 72%,
+          #5A2E12 82%,
+          #42210D 92%,
+          #361B09 100%
+        );
+      }
+
+      /* Garis celah sambungan antar papan (Seam Groove Line) */
+      .upper-wall-plank::after {
+        content: '';
+        position: absolute;
+        right: -1px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+          180deg,
+          #200E04 0%,
+          #1A0C03 50%,
+          #200E04 100%
+        );
+      }
+
+      .upper-wall-plank:last-child::after {
+        display: none;
+      }
+
+      /* Transisi vertikal gelap ke bawah (Y: 460px - 510px) */
+      .upper-wall-vertical-fade {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(40, 18, 5, 0) 0%,
+          rgba(40, 18, 5, 0) 90%,
+          rgba(40, 18, 5, 0.5) 95%,
+          rgba(29, 12, 3, 0.8) 100%
+        );
+        z-index: 2;
+      }
+
+      /* ZONA 2: Panel Kayu Vertikal Tengah - Middle Wainscoting (600px - 750px, 11.3%) */
+      .wood-panel-middle-bg {
+        position: absolute;
+        top: 600px;
+        left: 0;
+        right: 0;
+        height: 150px;
+        background: linear-gradient(
+          180deg,
+          #6b3314 0%,
+          #743714 25%,
+          #7b3c17 50%,
+          #803f19 75%,
+          #7b3c17 100%
+        );
+        display: flex;
+        align-items: stretch;
+        justify-content: flex-start;
+        border-bottom: 4px solid #1A0F07;
+      }
+
+      .wood-plank-middle {
+        width: 80px;
+        height: 100%;
+        border-right: 3.5px solid #4E240C;
+        flex-shrink: 0;
+        position: relative;
+      }
+
+      .wood-plank-middle::after {
+        content: '';
+        position: absolute;
+        right: -4px;
+        top: 0;
+        bottom: 0;
+        width: 0.5px;
+        background: rgba(160, 90, 40, 0.2);
+      }
+
+      /* ZONA 3: Balok Krem Manila - Partition Railing (750px - 802px, 3.9%) */
       .gallery-partition-bg {
-        position: fixed;
-        bottom: 50vh;
+        position: absolute;
+        top: 750px;
         left: 0;
         right: 0;
         height: 52px;
-        background: #d8ceb7;
-        border-top: 4px solid #1a0f07;
-        border-bottom: 4px solid #140b04;
-        z-index: -10;
+        background: linear-gradient(
+          180deg,
+          #DDD4BE 0%,
+          #D8CEB7 50%,
+          #D0C5AD 100%
+        );
+        border-top: 4px solid #1A0F07;
+        border-bottom: 4px solid #140B04;
         display: flex;
         align-items: center;
         justify-content: center;
-        pointer-events: none;
       }
 
       .partition-posts-bg {
@@ -51,100 +171,145 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         width: 100%;
         max-width: 1400px;
         height: 100%;
+        position: relative;
       }
 
       .post-item-bg {
         width: 13px;
         height: 34px;
-        background: #bcac91;
-        border: 2px solid #1a0f07;
+        background: #BCAC91;
+        border: 2px solid #1A0F07;
         border-radius: 2px;
       }
 
-      /* Wood Panel Vertikal - Di atas balok krem */
-      .wood-panel-bg {
-        position: fixed;
-        bottom: calc(50vh + 52px);
+      /* Pasak pojok kiri - relatif terhadap gallery-partition-bg */
+      .post-item-corner-left {
+        position: absolute;
+        left: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 13px;
+        height: 34px;
+        background: #BCAC91;
+        border: 2px solid #1A0F07;
+        border-radius: 2px;
+        z-index: 10;
+      }
+
+      /* Pasak pojok kanan - relatif terhadap gallery-partition-bg */
+      .post-item-corner-right {
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 13px;
+        height: 34px;
+        background: #BCAC91;
+        border: 2px solid #1A0F07;
+        border-radius: 2px;
+        z-index: 10;
+      }
+
+      /* ZONA 4: Lantai Biru Toska - Courtroom Floor (802px - 1400px, 42.7%) */
+      .courtroom-floor-bg {
+        position: absolute;
+        top: 802px;
         left: 0;
         right: 0;
-        height: 125px;
+        height: 598px;
         background: linear-gradient(
           180deg,
-          #4a210a 0%,
-          #55280e 15%,
-          #6b3314 40%,
-          #743714 60%,
-          #7b3c17 85%,
-          #803f19 100%
+          #1E535F 0%,
+          #2A6D7C 6px,
+          #2A6D7C calc(100% - 4px),
+          #245C69 100%
         );
-        z-index: -10;
-        display: flex;
-        align-items: stretch;
-        justify-content: flex-start;
-        pointer-events: none;
-      }
-
-      .wood-plank-line {
-        width: 80px;
-        height: 100%;
-        border-right: 3px solid rgba(60, 30, 12, 0.6);
-        flex-shrink: 0;
-        position: relative;
-      }
-
-      .wood-plank-line::after {
-        content: '';
-        position: absolute;
-        right: -4px;
-        top: 0;
-        bottom: 0;
-        width: 1px;
-        background: rgba(140, 71, 29, 0.3);
+        border-bottom: 4px solid #1C0E05;
       }
     </style>
   </head>
   <body x-data="portfolioApp">
-    <!-- Courtroom Floor Background (Fixed) -->
-    <div class="courtroom-floor-bg"></div>
-    <div class="gallery-partition-bg">
-      <div class="partition-posts-bg">
-        <div class="post-item-bg"></div>
-        <div class="post-item-bg"></div>
-        <div class="post-item-bg"></div>
-        <div class="post-item-bg"></div>
-        <div class="post-item-bg"></div>
-        <div class="post-item-bg"></div>
-        <div class="post-item-bg"></div>
+    <!-- Wrapper untuk semua background layers (scrollable) -->
+    <div class="courtroom-backgrounds-wrapper">
+      <!-- ZONA 1: Dinding Kayu Atas (0-510px) -->
+      <div class="courtroom-upper-wall-bg">
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-vertical-fade"></div>
       </div>
+
+      <!-- ZONA 2: Panel Kayu Tengah (510-630px) -->
+      <div class="wood-panel-middle-bg">
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+      </div>
+
+      <!-- ZONA 3: Balok Krem (630-682px) -->
+      <div class="gallery-partition-bg">
+        <!-- Pasak pojok kiri (langsung child dari gallery-partition-bg) -->
+        <div class="post-item-corner-left"></div>
+        
+        <div class="partition-posts-bg">
+          <!-- Pasak tengah dengan jarak merata -->
+          <div class="post-item-bg"></div>
+          <div class="post-item-bg"></div>
+          <div class="post-item-bg"></div>
+          <div class="post-item-bg"></div>
+          <div class="post-item-bg"></div>
+          <div class="post-item-bg"></div>
+          <div class="post-item-bg"></div>
+          <div class="post-item-bg"></div>
+          <div class="post-item-bg"></div>
+          <div class="post-item-bg"></div>
+          <div class="post-item-bg"></div>
+        </div>
+        
+        <!-- Pasak pojok kanan (langsung child dari gallery-partition-bg) -->
+        <div class="post-item-corner-right"></div>
+      </div>
+
+      <!-- ZONA 4: Lantai Toska (802px - 1400px) -->
+      <div class="courtroom-floor-bg"></div>
     </div>
-    <!-- Wood Panel Vertikal (Di atas balok krem) -->
-    <div class="wood-panel-bg">
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-      <div class="wood-plank-line"></div>
-    </div>
+    
+    <!-- Lampu Gantung dengan Efek Sinar Cahaya -->
+    <HangingLamp />
     
     <slot />
   </body>
@@ -153,25 +318,17 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
 <script>
   import Alpine from 'alpinejs';
 
-  // Define global Alpine data component
   Alpine.data('portfolioApp', () => ({
-    // Modal visibility flags
     showEnvelopeModal: false,
     showSkillsModal: false,
     showContactModal: false,
     showProjectModal: false,
     currentProjectIndex: 0,
-
-    // TopBar state
     isSoundOn: true,
     sanityLevel: 85,
-
-    // Career section tab state
     activeCareerTab: 1,
 
-    // Initialize component
     init() {
-      // Close all modals on Escape key press
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           this.closeAllModals();
@@ -179,7 +336,6 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
       });
     },
 
-    // Open a specific modal by name
     openModal(name: string) {
       this.closeAllModals();
       if (name === 'envelope') this.showEnvelopeModal = true;
@@ -188,7 +344,6 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
       if (name === 'project') this.showProjectModal = true;
     },
 
-    // Close all modals
     closeAllModals() {
       this.showEnvelopeModal = false;
       this.showSkillsModal = false;
@@ -196,17 +351,14 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
       this.showProjectModal = false;
     },
 
-    // Toggle sound on/off
     toggleSound() {
       this.isSoundOn = !this.isSoundOn;
     },
 
-    // Set active career tab
     setCareerTab(tabNumber: number) {
       this.activeCareerTab = tabNumber;
     }
   }));
 
-  // Start Alpine.js
   Alpine.start();
 </script>

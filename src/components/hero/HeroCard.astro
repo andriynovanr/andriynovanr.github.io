@@ -1,14 +1,9 @@
 ---
-// HeroCard - Wooden plaque with name
+// HeroCard - Profile section (placeholder for future content)
 ---
 
 <section id="hero" class="hero-section">
-  <div class="hero-plaque">
-    <div class="plaque-inner">
-      <h1 class="hero-name">ANDRIY NOVAN RAHMAN</h1>
-      <p class="hero-subtitle">Presiding Officer of Code Integrity & Vulnerability Assessment</p>
-    </div>
-  </div>
+  <!-- Profile content akan ditambahkan di sini nanti -->
 </section>
 
 <style>
@@ -16,88 +11,5 @@
     margin-bottom: 40px;
     display: flex;
     justify-content: center;
-  }
-
-  .hero-plaque {
-    background: var(--color-tan);
-    border: 6px solid var(--color-wood-dark);
-    border-radius: 12px;
-    padding: 6px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5),
-                inset 0 2px 4px rgba(255, 255, 255, 0.1);
-    max-width: 440px;
-    width: 100%;
-    position: relative;
-    z-index: 10;
-  }
-
-  .hero-plaque::before {
-    content: '';
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    right: 3px;
-    bottom: 3px;
-    border: 2px solid rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    pointer-events: none;
-  }
-
-  .plaque-inner {
-    background: linear-gradient(135deg, #d4a574 0%, #c9a876 50%, #b8935f 100%);
-    border: 3px solid var(--color-wood-dark);
-    border-radius: 6px;
-    padding: 20px 24px;
-    text-align: center;
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
-  }
-
-  .hero-name {
-    font-size: 24px;
-    font-weight: 900;
-    color: var(--color-ink);
-    letter-spacing: 1px;
-    margin: 0 0 8px 0;
-    font-family: Arial, sans-serif;
-    text-transform: uppercase;
-    line-height: 1.2;
-  }
-
-  .hero-subtitle {
-    font-size: 12px;
-    color: var(--color-ink-light);
-    margin: 0;
-    font-style: italic;
-    line-height: 1.4;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 640px) {
-    .hero-plaque {
-      max-width: 90%;
-      border-width: 5px;
-    }
-
-    .plaque-inner {
-      padding: 16px 20px;
-    }
-
-    .hero-name {
-      font-size: 20px;
-    }
-
-    .hero-subtitle {
-      font-size: 11px;
-    }
-  }
-
-  @media (min-width: 641px) and (max-width: 1024px) {
-    .hero-name {
-      font-size: 26px;
-    }
-
-    .hero-subtitle {
-      font-size: 13px;
-    }
   }
 </style>
