@@ -1,5 +1,6 @@
 ---
-// TopBar - Fixed top navigation with circular buttons and sanity meter
+// TopBar - Fixed top navigation with circular buttons
+import SanityMeter from '../hud/SanityMeter.astro';
 ---
 
 <header class="topbar">
@@ -15,19 +16,16 @@
   </div>
   
   <div class="topbar-right">
-    <span class="energy-label">SANITY / ENERGY</span>
-    <div class="energy-value">85</div>
-    <div class="energy-bar-container">
-      <div class="energy-bar">
-        <div class="energy-fill" :style="`width: ${sanityLevel}%`"></div>
-      </div>
-    </div>
+    <!-- Sanity Meter Inline (paling kiri dalam topbar-right) -->
+    <SanityMeter />
+    
     <button class="circle-btn yellow-btn" title="Pause" aria-label="Pause">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <rect x="4" y="2" width="3" height="12" fill="currentColor"/>
         <rect x="9" y="2" width="3" height="12" fill="currentColor"/>
       </svg>
     </button>
+    
     <button 
       class="circle-btn red-btn"
       @click="toggleSound()" 
@@ -106,45 +104,6 @@
     border-radius: 50%;
   }
 
-  .energy-label {
-    font-size: 10px;
-    color: white;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-
-  .energy-value {
-    font-size: 11px;
-    color: var(--color-yellow);
-    font-weight: bold;
-    min-width: 20px;
-    text-align: right;
-  }
-
-  .energy-bar-container {
-    width: 100px;
-    padding: 2px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-  }
-
-  .energy-bar {
-    width: 100%;
-    height: 10px;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 6px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .energy-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #c44e4e 0%, #e84c6c 100%);
-    transition: width 0.3s ease;
-    border-radius: 6px;
-  }
-
   /* Responsive adjustments */
   @media (max-width: 640px) {
     .topbar {
@@ -155,14 +114,6 @@
     .circle-btn {
       width: 32px;
       height: 32px;
-    }
-
-    .energy-label {
-      display: none;
-    }
-
-    .energy-bar-container {
-      width: 80px;
     }
 
     .topbar-left,
@@ -184,14 +135,6 @@
     .circle-btn svg {
       width: 14px;
       height: 14px;
-    }
-
-    .energy-value {
-      font-size: 10px;
-    }
-
-    .energy-bar-container {
-      width: 60px;
     }
 
     .topbar-left,
