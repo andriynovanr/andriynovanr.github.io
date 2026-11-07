@@ -1,0 +1,206 @@
+---
+// TestimonyPlaque - Papan Deskripsi Saksi
+---
+
+<div class="testimony-plaque">
+  <!-- Tab Judul Kiri Atas -->
+  <div class="testimony-tab">
+    <span class="tab-text">TO VISITOR</span>
+  </div>
+  
+  <!-- Wadah Utama -->
+  <div class="testimony-content">
+    <!-- Teks Pernyataan -->
+    <p class="testimony-statement">
+      Hello, I'm Andriy. I test, break, and build web and mobile apps. My job is ensuring your code survives the harshest cross-examinations.
+    </p>
+    
+    <!-- Garis Pembatas -->
+    <div class="testimony-divider"></div>
+    
+    <!-- Footer Controls -->
+    <div class="testimony-footer">
+      <div class="testimony-label">
+        <span class="location-indicator"></span>
+        <span>Surabaya, East Java, Indonesia</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .testimony-plaque {
+    position: relative;
+    width: 100%;
+    max-width: 760px;
+    min-width: 620px;
+  }
+
+  /* Tab Judul Kiri Atas */
+  .testimony-tab {
+    position: absolute;
+    top: -42px;
+    left: 28px;
+    background: #AEC838;
+    border: 4px solid #1A1208;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    padding: 8px 22px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tab-text {
+    font-family: 'Special Elite', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1A1208;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+
+  /* Wadah Utama */
+  .testimony-content {
+    background: #AEC838;
+    border: 4px solid #1A1208;
+    border-radius: 22px;
+    padding: 28px 28px 24px 28px;
+    box-shadow: 0px 8px 0px #140B05;
+    position: relative;
+  }
+
+  /* Teks Pernyataan */
+  .testimony-statement {
+    font-family: 'Special Elite', monospace;
+    font-size: 16px;
+    font-weight: 500;
+    color: #1A1208;
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+  }
+
+  /* Garis Pembatas */
+  .testimony-divider {
+    width: 97%;
+    height: 2px;
+    background: #8EAA2E;
+    margin: 16px auto;
+    border-radius: 1px;
+  }
+
+  /* Footer Controls */
+  .testimony-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 16px;
+  }
+
+  /* Label Kiri */
+  .testimony-label {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #1A1208;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Indikator Lokasi Merah Berkedip */
+  .location-indicator {
+    width: 10px;
+    height: 10px;
+    background: #B01E23;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    animation: pulse-glow 1.5s ease-in-out infinite;
+  }
+
+  /* Efek Kedip-kedip dengan Glow */
+  @keyframes pulse-glow {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(176, 30, 35, 0.7);
+    }
+    50% {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 4px rgba(176, 30, 35, 0.3), 0 0 8px 2px rgba(176, 30, 35, 0.4);
+    }
+  }
+
+  /* Tombol Kanan */
+  .testimony-button {
+    background: #1A1208;
+    border: 2px solid #1A1208;
+    border-radius: 16px;
+    padding: 8px 20px;
+    box-shadow: 0px 4px 0px #0F0904;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .button-text {
+    font-family: 'Special Elite', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #FEE87E;
+  }
+
+  .button-arrow {
+    font-size: 11px;
+    color: #FEE87E;
+  }
+
+  /* Hover Effect */
+  .testimony-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 0px #0F0904;
+  }
+
+  .testimony-button:hover .button-text,
+  .testimony-button:hover .button-arrow {
+    color: #FFF19E;
+  }
+
+  /* Active/Pressed Effect */
+  .testimony-button:active {
+    transform: translateY(3px);
+    box-shadow: 0px 1px 0px #0F0904;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .testimony-plaque {
+      min-width: auto;
+      max-width: 100%;
+    }
+
+    .testimony-statement {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .testimony-content {
+      padding: 24px 20px 20px 20px;
+    }
+
+    .testimony-button {
+      padding: 6px 16px;
+    }
+
+    .button-text {
+      font-size: 12px;
+    }
+  }
+</style>
