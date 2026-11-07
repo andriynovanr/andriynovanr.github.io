@@ -8,20 +8,31 @@
     <div class="witness-card">
       <!-- Photo Frame dengan foto di dalamnya -->
       <div class="photo-frame-wrapper">
-        <img src="/icons/icon_photo.png" alt="Photo Frame" class="photo-frame-border" />
+        <!-- Icon paperclip di kiri atas -->
+        <img src="/icons/icon_paperclip.png" alt="Paperclip" class="icon-paperclip" />
+        
+        <!-- Icon on stand di kanan atas -->
+        <img src="/icons/icon_onstand.png" alt="On Stand" class="icon-onstand" />
+        
+        <!-- Garis pembatas atas -->
+        <div class="frame-border-top"></div>
+        
         <div class="photo-inner"></div>
-      </div>
-      
-      <!-- Text Content di bawah foto -->
-      <div class="witness-info">
-        <!-- Baris 1: Role -->
-        <div class="witness-role">WITNESS · QA ENGINEER</div>
         
-        <!-- Baris 2: Nama (Highlight utama) -->
-        <div class="witness-name">ANDRIY NOVAN RAHMAN</div>
+        <!-- Garis pembatas bawah -->
+        <div class="frame-border-bottom"></div>
         
-        <!-- Baris 3: Case Number Pill -->
-        <div class="case-number-pill">CASE NO. ANR-2026</div>
+        <!-- Text overlay di dalam bingkai, di atas frame tapi di bawah foto -->
+        <div class="text-overlay-wrapper">
+          <!-- Baris 1: Role (paling atas) -->
+          <div class="witness-role-overlay">WITNESS · QA ENGINEER</div>
+          
+          <!-- Baris 2: Nama (tengah) -->
+          <div class="witness-name-overlay">ANDRIY NOVAN RAHMAN</div>
+          
+          <!-- Baris 3: Case Number Pill (paling bawah) -->
+          <div class="case-number-pill-overlay">CASE NO. ANR-2026</div>
+        </div>
       </div>
     </div>
   </div>
@@ -46,11 +57,11 @@
   /* ===== BASE CARD MANILA ===== */
   .witness-card {
     position: relative;
-    width: 420px;
+    width: 360px;
     background: #B69F68;
-    border: 4px solid #1E140A;
+    border: 2px solid #1E140A;
     border-radius: 16px;
-    padding: 16px;
+    padding: 12px;
     box-shadow: 6px 8px 0px #140B05;
     cursor: pointer;
     
@@ -69,88 +80,127 @@
   .photo-frame-wrapper {
     position: relative;
     width: 100%;
-    height: 420px;
-    margin-bottom: 14px;
-  }
-
-  /* Border bingkai di bawah sebagai base layer */
-  .photo-frame-border {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    z-index: 1;
-    pointer-events: none;
+    height: 460px;
+    margin-bottom: 12px;
+    background: #B69F68;
     border-radius: 12px;
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  /* Hover: Pendaran kuning pada bingkai */
-  .witness-card:hover .photo-frame-border {
-    box-shadow: 0 0 10px rgba(255, 230, 59, 0.35);
+  /* Icon paperclip di kiri atas */
+  .icon-paperclip {
+    position: absolute;
+    top: -42px;
+    left: 6px;
+    width: 65px;
+    height: auto;
+    z-index: 10;
+    transform: rotate(-12deg);
   }
 
-  /* Foto di atas bingkai */
+  /* Icon on stand di kanan atas */
+  .icon-onstand {
+    position: absolute;
+    top: -10px;
+    right: 12px;
+    width: 70px;
+    height: auto;
+    z-index: 10;
+  }
+
+  /* Garis pembatas atas */
+  .frame-border-top {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 3px;
+    background: #1E140A;
+    border-radius: 2px;
+    z-index: 1;
+  }
+
+  /* Garis pembatas bawah */
+  .frame-border-bottom {
+    position: absolute;
+    bottom: 78px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 3px;
+    background: #1E140A;
+    border-radius: 2px;
+    z-index: 1;
+  }
+
+  /* Foto di dalam wrapper */
   .photo-inner {
     position: absolute;
-    top: 45%;
+    top: 44%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 214px;
-    height: 269px;
+    width: 260px;
+    height: 327px;
     background-image: url('/icons/my_photo.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 2;
+    z-index: 3;
     border-radius: 8px;
     overflow: hidden;
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  /* Hover: Zoom foto perlahan */
+  /* Hover: Zoom foto perlahan + pendaran kuning pada foto */
   .witness-card:hover .photo-inner {
     transform: translate(-50%, -50%) scale(1.04);
+    box-shadow: 0 0 15px rgba(255, 230, 59, 0.6);
   }
 
-  /* ===== WITNESS INFO TEXT ===== */
-  .witness-info {
-    text-align: center;
-    padding: 0 16px;
+  /* ===== TEXT OVERLAY WRAPPER DI DALAM BINGKAI ===== */
+  .text-overlay-wrapper {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
   }
 
-  /* Baris 1: Role */
-  .witness-role {
+  /* Baris 1: Role (paling atas) */
+  .witness-role-overlay {
     font-family: 'Special Elite', monospace;
-    font-size: 10.5px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.08em;
     color: #1E140A;
     opacity: 0.75;
-    margin-bottom: 6px;
+    text-align: center;
     transition: opacity 0.25s ease;
   }
 
-  .witness-card:hover .witness-role {
+  .witness-card:hover .witness-role-overlay {
     opacity: 1;
   }
 
-  /* Baris 2: Nama (HIGHLIGHT UTAMA) */
-  .witness-name {
+  /* Baris 2: Nama (tengah, HIGHLIGHT UTAMA) */
+  .witness-name-overlay {
     font-family: 'Special Elite', monospace;
     font-size: 13px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: #1E140A;
-    margin-bottom: 9px;
+    text-align: center;
     transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   /* Hover: Nama menyala kuning emas dengan outline hitam */
-  .witness-card:hover .witness-name {
+  .witness-card:hover .witness-name-overlay {
     color: #FFE63B;
     transform: translateY(-1px);
     text-shadow: 
@@ -161,13 +211,13 @@
        0px    2px   0px #140B05;
   }
 
-  /* Baris 3: Case Number Pill */
-  .case-number-pill {
+  /* Baris 3: Case Number Pill (paling bawah) */
+  .case-number-pill-overlay {
     display: inline-block;
     width: 135px;
     height: 21px;
     background: #CEB98A;
-    border: 1.5px solid #1E140A;
+    border: 1px solid #1E140A;
     border-radius: 10.5px;
     font-family: 'Special Elite', monospace;
     font-size: 9px;
@@ -179,7 +229,7 @@
   }
 
   /* Hover: Pill berubah merah dengan teks kuning */
-  .witness-card:hover .case-number-pill {
+  .witness-card:hover .case-number-pill-overlay {
     background: #A42422;
     color: #FFE63B;
     box-shadow: 0px 2px 0px #1E140A;
