@@ -4,6 +4,7 @@ import TopBar from '../components/navigation/TopBar.astro';
 import BottomNav from '../components/navigation/BottomNav.astro';
 import HeroCard from '../components/hero/HeroCard.astro';
 import EnvelopeSection from '../components/hero/EnvelopeSection.astro';
+import TestimonyPlaque from '../components/hero/TestimonyPlaque.astro';
 import CareerSection from '../components/sections/CareerSection.astro';
 import ModalEnvelope from '../components/modals/ModalEnvelope.astro';
 import ModalSkills from '../components/modals/ModalSkills.astro';
@@ -20,8 +21,14 @@ import ModalContact from '../components/modals/ModalContact.astro';
     <!-- Hero section with profile card -->
     <HeroCard />
 
-    <!-- Envelope CTA section -->
-    <EnvelopeSection />
+    <!-- Container untuk Photo Card dan Testimony Plaque -->
+    <div class="hero-witness-container">
+      <!-- Photo ID Card -->
+      <EnvelopeSection />
+      
+      <!-- Testimony Plaque di samping kanan -->
+      <TestimonyPlaque />
+    </div>
 
     <!-- Career & experience tabbed section -->
     <CareerSection />

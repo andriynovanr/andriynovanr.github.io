@@ -24,14 +24,11 @@
         
         <!-- Text overlay di dalam bingkai, di atas frame tapi di bawah foto -->
         <div class="text-overlay-wrapper">
-          <!-- Baris 1: Role (paling atas) -->
-          <div class="witness-role-overlay">WITNESS · QA ENGINEER</div>
-          
-          <!-- Baris 2: Nama (tengah) -->
+          <!-- Baris 1: Nama -->
           <div class="witness-name-overlay">ANDRIY NOVAN RAHMAN</div>
           
-          <!-- Baris 3: Case Number Pill (paling bawah) -->
-          <div class="case-number-pill-overlay">CASE NO. ANR-2026</div>
+          <!-- Baris 2: Tanggal Lahir Pill -->
+          <div class="case-number-pill-overlay">28 MAY 2005</div>
         </div>
       </div>
     </div>
@@ -40,17 +37,14 @@
 
 <style is:global>
   .envelope-section {
-    margin-top: 20px;
-    margin-bottom: 50px;
-    display: flex;
-    justify-content: flex-start;
-    padding-left: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
     position: relative;
     z-index: 10;
   }
 
   .photo-card-container {
-    margin-left: -180px;
+    margin-left: 0;
     perspective: 1000px;
   }
 
@@ -160,7 +154,7 @@
   /* ===== TEXT OVERLAY WRAPPER DI DALAM BINGKAI ===== */
   .text-overlay-wrapper {
     position: absolute;
-    bottom: 8px;
+    bottom: 18px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
@@ -168,29 +162,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
   }
 
-  /* Baris 1: Role (paling atas) */
-  .witness-role-overlay {
-    font-family: 'Special Elite', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #1E140A;
-    opacity: 0.75;
-    text-align: center;
-    transition: opacity 0.25s ease;
-  }
-
-  .witness-card:hover .witness-role-overlay {
-    opacity: 1;
-  }
-
-  /* Baris 2: Nama (tengah, HIGHLIGHT UTAMA) */
+  /* Baris 1: Nama (HIGHLIGHT UTAMA) */
   .witness-name-overlay {
     font-family: 'Special Elite', monospace;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -211,19 +189,19 @@
        0px    2px   0px #140B05;
   }
 
-  /* Baris 3: Case Number Pill (paling bawah) */
+  /* Baris 2: Tanggal Lahir Pill */
   .case-number-pill-overlay {
     display: inline-block;
-    width: 135px;
-    height: 21px;
+    width: 145px;
+    height: 24px;
     background: #CEB98A;
     border: 1px solid #1E140A;
-    border-radius: 10.5px;
+    border-radius: 12px;
     font-family: 'Special Elite', monospace;
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 700;
     color: #1E140A;
-    line-height: 21px;
+    line-height: 24px;
     text-align: center;
     transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
