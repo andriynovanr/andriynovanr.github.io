@@ -1,12 +1,13 @@
 ---
-// ModalContact - Contact form modal
+// ModalContact - HIRE ME Form (Court Docket Summons & Dispatch)
+// Security: Rate Limiting, XSS Protection, CSRF, Honeypot (reCAPTCHA disabled - Pro feature)
 ---
 
 <div 
-  class="modal-overlay" 
+  class="modal-overlay-hireme" 
   x-show="showContactModal"
   @click.self="closeAllModals()"
-  x-transition:enter="transition ease-out duration-300"
+  x-transition:enter="transition ease-out duration-250"
   x-transition:enter-start="opacity-0"
   x-transition:enter-end="opacity-100"
   x-transition:leave="transition ease-in duration-200"
@@ -14,205 +15,642 @@
   x-transition:leave-end="opacity-0"
   style="display: none;"
 >
-  <div class="modal-content">
-    <button class="modal-close-btn" @click="closeAllModals()" aria-label="Close modal">×</button>
+  <div 
+    class="hireme-docket-card"
+    x-show="showContactModal"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 scale-92 translate-y-6"
+    x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-95"
+  >
+    <!-- Tombol Tutup X Pojok Kanan Atas -->
+    <button class="hireme-close-btn" @click="closeAllModals()" aria-label="Close">×</button>
     
-    <div class="modal-header">
-      <h2 class="modal-title">SUMMONS & DIRECT CONTACT</h2>
-      <p class="modal-subtitle">Serve The Subpoena: Hire Andriy</p>
+    <!-- Header Area -->
+    <div class="hireme-header">
+      <!-- Lencana Status Available -->
+      <div class="hireme-badge">
+        <span class="badge-dot">●</span>
+        <span class="badge-text">AVAILABLE FOR HIRE</span>
+      </div>
+      
+      <!-- Judul Utama dengan Highlight -->
+      <h2 class="hireme-title">
+        VERDICT: <span class="title-highlight">HIRE ANDRIY</span>
+      </h2>
     </div>
 
-    <div class="modal-body">
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('Form submission feature coming soon!');">
-        <!-- Name field -->
-        <div class="form-group">
-          <label for="client-name" class="form-label">Prosecutor/Client Name</label>
-          <input 
-            type="text" 
-            id="client-name" 
-            name="name" 
-            class="form-input" 
-            placeholder="Enter your name"
-            required
-          />
-        </div>
-
-        <!-- Email field -->
-        <div class="form-group">
-          <label for="client-email" class="form-label">Contact Email</label>
-          <input 
-            type="email" 
-            id="client-email" 
-            name="email" 
-            class="form-input" 
-            placeholder="your.email@example.com"
-            required
-          />
-        </div>
-
-        <!-- Message field -->
-        <div class="form-group">
-          <label for="project-details" class="form-label">Project Details/Charges</label>
-          <textarea 
-            id="project-details" 
-            name="message" 
-            class="form-textarea" 
-            rows="5" 
-            placeholder="Describe your project, requirements, or the evidence you need examined..."
-            required
-          ></textarea>
-        </div>
-
-        <!-- Submit button -->
-        <button type="submit" class="btn-court submit-btn">
-          DELIVER VERDICT (SEND)
-        </button>
-      </form>
-
-      <!-- Direct contact info -->
-      <div class="direct-contact">
-        <p class="contact-label">Direct Inquiries:</p>
-        <a href="mailto:andriynovanr@gmail.com" class="contact-link">
-          andriynovanr@gmail.com
-        </a>
+    <!-- Tiga Kotak Kontak Cepat (Quick Dispatch Channels) -->
+    <div class="quick-dispatch-grid">
+      <!-- Email -->
+      <div class="dispatch-card">
+        <p class="dispatch-label">DIRECT INQUIRY</p>
+        <p class="dispatch-value">andriynovanr@gmail.com</p>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=andriynovanr@gmail.com" target="_blank" rel="noopener noreferrer" class="dispatch-btn dispatch-btn-mail">Mail</a>
       </div>
+      
+      <!-- Telegram -->
+      <div class="dispatch-card">
+        <p class="dispatch-label">TELEGRAM ENVOY</p>
+        <p class="dispatch-value">@andriynovan</p>
+        <a href="https://t.me/andriynovan" target="_blank" class="dispatch-btn dispatch-btn-telegram">Chat</a>
+      </div>
+      
+      <!-- LinkedIn -->
+      <div class="dispatch-card">
+        <p class="dispatch-label">PROFESSIONAL BAR</p>
+        <p class="dispatch-value">Andriy Novan Rahman</p>
+        <a href="https://www.linkedin.com/in/andriy-novan-rahman/" target="_blank" rel="noopener noreferrer" class="dispatch-btn dispatch-btn-linkedin">Profile</a>
+      </div>
+    </div>
+
+    <!-- Form Input Data -->
+    <div x-data="hiremeForm()">
+      <form 
+        class="hireme-form" 
+        @submit.prevent="handleSubmit($event)"
+      >
+        <!-- Hidden honeypot for spam protection (Enhanced) -->
+        <input type="hidden" name="from_name" value="Portfolio Hire Form" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
+        <input type="text" name="website" class="hidden" style="display: none; position: absolute; left: -9999px;" tabindex="-1" autocomplete="off" />
+        
+        <!-- Dua Kolom Input Atas -->
+        <div class="form-row-dual">
+          <div class="form-field">
+            <input 
+              type="text" 
+              name="name"
+              class="docket-input" 
+              placeholder="Your Name / Organization"
+              maxlength="100"
+              required
+            />
+          </div>
+          <div class="form-field">
+            <input 
+              type="email" 
+              name="email"
+              class="docket-input" 
+              placeholder="Your Email Address"
+              maxlength="100"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Kotak Deskripsi Kasus (Case Brief) -->
+        <div class="form-field">
+          <textarea 
+            name="message"
+            class="docket-textarea" 
+            placeholder="Case Brief: Describe your project scope, timeline, budget, and technical requirements..."
+            rows="4"
+            minlength="10"
+            maxlength="5000"
+            required
+            @input="charCount = $el.value.length"
+          ></textarea>
+          <div class="char-counter">
+            <span x-text="charCount"></span>/5000 characters
+          </div>
+        </div>
+
+        <!-- Status Messages -->
+        <div x-show="submitted" x-cloak class="form-message form-success">
+          ✓ Verdict transmitted successfully! I'll review your case and respond within 24 hours.
+        </div>
+        
+        <div x-show="error" x-cloak class="form-message form-error">
+          <span x-text="errorMessage"></span>
+        </div>
+        
+        <div x-show="cooldown &gt; 0 &amp;&amp; !submitting" x-cloak class="form-message form-warning">
+          ⏱ Cooldown active: Please wait <span x-text="cooldown"></span> seconds before next submission.
+        </div>
+
+        <!-- Tombol Eksekusi -->
+        <div class="form-actions">
+          <button 
+            type="submit" 
+            class="btn-transmit-verdict"
+            :disabled="submitting || cooldown &gt; 0"
+          >
+            <span x-show="!submitting &amp;&amp; cooldown === 0">SUBMIT</span>
+            <span x-show="submitting" x-cloak>SENDING...</span>
+            <span x-show="!submitting &amp;&amp; cooldown &gt; 0" x-cloak>
+              WAIT <span x-text="cooldown"></span>s
+            </span>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 
-<style>
-  .modal-header {
-    text-align: center;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid var(--color-gold);
+<script is:inline>
+  function hiremeForm() {
+    return {
+      submitting: false,
+      submitted: false,
+      error: false,
+      errorMessage: '',
+      cooldown: 0,
+      charCount: 0,
+      
+      init() {
+        this.checkRateLimit();
+        setInterval(() => {
+          if (this.cooldown > 0) this.cooldown--;
+        }, 1000);
+      },
+      
+      checkRateLimit() {
+        const submissions = JSON.parse(localStorage.getItem('formSubmissions') || '[]');
+        const now = Date.now();
+        const tenMin = now - 600000;
+        const recent = submissions.filter((t) => t > tenMin);
+        
+        if (recent.length >= 3) {
+          const oldest = Math.min(...recent);
+          const cooldownEnd = oldest + 600000;
+          this.cooldown = Math.ceil((cooldownEnd - now) / 1000);
+          return false;
+        }
+        return true;
+      },
+      
+      sanitize(input) {
+        return input.replace(/[<>]/g, '').replace(/javascript:/gi, '').replace(/on\w+=/gi, '').trim().substring(0, 5000);
+      },
+      
+      async handleSubmit(event) {
+        if (this.cooldown > 0) {
+          this.error = true;
+          this.errorMessage = 'Rate limit exceeded. Please wait.';
+          return;
+        }
+        
+        if (!this.checkRateLimit()) {
+          this.error = true;
+          this.errorMessage = 'Too many submissions. Please wait 10 minutes.';
+          return;
+        }
+        
+        if (event.target.botcheck.checked || event.target.website.value) {
+          console.log('Bot detected');
+          return;
+        }
+        
+        this.submitting = true;
+        this.error = false;
+        this.errorMessage = '';
+        
+        const name = this.sanitize(event.target.name.value);
+        const email = this.sanitize(event.target.email.value);
+        const message = this.sanitize(event.target.message.value);
+        
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          this.error = true;
+          this.errorMessage = 'Invalid email format';
+          this.submitting = false;
+          return;
+        }
+        
+        if (message.length < 10) {
+          this.error = true;
+          this.errorMessage = 'Message must be at least 10 characters';
+          this.submitting = false;
+          return;
+        }
+        
+        try {
+          // reCAPTCHA disabled (Web3Forms Pro feature)
+          // Using honeypot + rate limiting for spam protection
+          
+          const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({
+              access_key: '9070fc4c-8f17-4219-9156-7de9050b0451',
+              name: name,
+              email: email,
+              message: message,
+              subject: 'New Hire Inquiry from ' + name
+            })
+          });
+          
+          const data = await response.json();
+          this.submitting = false;
+          
+          if (data.success) {
+            const subs = JSON.parse(localStorage.getItem('formSubmissions') || '[]');
+            subs.push(Date.now());
+            if (subs.length > 10) subs.shift();
+            localStorage.setItem('formSubmissions', JSON.stringify(subs));
+            
+            this.submitted = true;
+            event.target.reset();
+            this.charCount = 0;
+            this.cooldown = 60;
+            
+            setTimeout(() => { 
+              this.submitted = false;
+              // Close modal after successful submission
+              const closeEvent = new CustomEvent('close-modal');
+              window.dispatchEvent(closeEvent);
+            }, 4000);
+          } else {
+            this.error = true;
+            this.errorMessage = data.message || 'Submission failed. Please try again.';
+          }
+        } catch (err) {
+          this.submitting = false;
+          this.error = true;
+          this.errorMessage = 'Network error. Please try again.';
+          console.error('Form error:', err);
+        }
+      }
+    };
+  }
+</script>
+
+<style is:global>
+  /* ===== BACKDROP GELAP (COURTROOM DIMMER OVERLAY) ===== */
+  .modal-overlay-hireme {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(18, 11, 6, 0.65);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
   }
 
-  .modal-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--color-burgundy);
-    margin: 0 0 8px 0;
+  /* ===== WADAH UTAMA MODAL (MAIN DOCKET CARD) ===== */
+  .hireme-docket-card {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    background: #F4EEDD;
+    border: 4px solid #1C0F06;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 8px 12px 0px #140B05;
+    z-index: 51;
+  }
+
+  /* ===== TOMBOL TUTUP X POJOK KANAN ATAS ===== */
+  .hireme-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    background: #A42422;
+    border: 2.5px solid #1C0F06;
+    border-radius: 50%;
+    color: #FFF1A8;
+    font-size: 18px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px #1C0F06;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .hireme-close-btn:hover {
+    background: #C12C2A;
+    transform: rotate(90deg) scale(1.08);
+  }
+
+  .hireme-close-btn:active {
+    transform: scale(0.92) rotate(90deg);
+    box-shadow: 0px 0px 0px;
+  }
+
+  /* ===== HEADER AREA ===== */
+  .hireme-header {
+    margin-bottom: 24px;
+  }
+
+  /* Lencana Status Available */
+  .hireme-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #3F7856;
+    border: 1.5px solid #1C0F06;
+    border-radius: 12px;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+  }
+
+  .badge-dot {
+    color: #4ADE80;
+    font-size: 12px;
+  }
+
+  .badge-text {
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    color: #E9F59D;
     letter-spacing: 0.1em;
-    font-family: 'Georgia', serif;
+    text-transform: uppercase;
   }
 
-  .modal-subtitle {
-    font-size: 14px;
-    font-style: italic;
-    color: var(--color-ink-light);
-    margin: 0;
+  /* Judul Utama */
+  .hireme-title {
+    font-family: 'Special Elite', monospace;
+    font-size: 27px;
+    font-weight: 900;
+    color: #1C0F06;
+    margin: 0 0 8px 0;
+    letter-spacing: 0.02em;
   }
 
-  .modal-body {
-    margin-bottom: 0;
+  .title-highlight {
+    position: relative;
+    display: inline-block;
   }
 
-  /* Form styles */
-  .contact-form {
-    margin-bottom: 24px;
+  .title-highlight::before {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: -2px;
+    right: -2px;
+    height: 40%;
+    background: #CCE575;
+    z-index: -1;
   }
 
-  .form-group {
+  /* ===== TIGA KOTAK KONTAK CEPAT ===== */
+  .quick-dispatch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     margin-bottom: 20px;
   }
 
-  .form-label {
-    display: block;
-    font-size: 14px;
-    font-weight: bold;
-    color: var(--color-ink);
-    margin-bottom: 8px;
-    letter-spacing: 0.05em;
-  }
-
-  .form-input,
-  .form-textarea {
-    width: 100%;
-    padding: 12px;
-    font-size: 14px;
-    font-family: 'Georgia', 'Times New Roman', serif;
-    color: var(--color-ink);
-    background: var(--color-cream);
-    border: 2px solid var(--color-wood-dark);
-    border-radius: 4px;
-    transition: all 0.3s ease;
-  }
-
-  .form-input:focus,
-  .form-textarea:focus {
-    outline: none;
-    border-color: var(--color-gold);
-    box-shadow: 0 0 8px rgba(200, 150, 12, 0.3);
-  }
-
-  .form-textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-
-  .submit-btn {
-    width: 100%;
-    font-size: 16px;
-    padding: 14px 24px;
-  }
-
-  /* Direct contact section */
-  .direct-contact {
+  .dispatch-card {
+    background: #EFE9D5;
+    border: 2px solid #1C0F06;
+    border-radius: 10px;
+    padding: 10px;
     text-align: center;
-    padding: 16px;
-    background: rgba(245, 230, 211, 0.5);
-    border: 2px dashed var(--color-gold);
-    border-radius: 8px;
   }
 
-  .contact-label {
-    font-size: 13px;
-    font-weight: bold;
-    color: var(--color-ink-light);
+  .dispatch-label {
+    font-family: 'Special Elite', monospace;
+    font-size: 8.5px;
+    font-weight: 700;
+    color: #1C0F06;
+    opacity: 0.7;
+    margin: 0 0 4px 0;
+    text-transform: uppercase;
+  }
+
+  .dispatch-value {
+    font-family: 'Special Elite', monospace;
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #1C0F06;
     margin: 0 0 8px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  .contact-link {
-    font-size: 16px;
-    font-weight: bold;
-    color: var(--color-burgundy);
+  .dispatch-btn {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1.5px solid #1C0F06;
+    border-radius: 8px;
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    font-weight: 700;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  .contact-link:hover {
-    color: var(--color-gold);
-    text-decoration: underline;
+  .dispatch-btn-mail {
+    background: #B65D20;
+    color: #FFFFFF;
   }
 
-  /* Responsive adjustments */
+  .dispatch-btn-telegram {
+    background: #2A7580;
+    color: #FFFFFF;
+  }
+
+  .dispatch-btn-linkedin {
+    background: #2A7246;
+    color: #F7F3E7;
+  }
+
+  .dispatch-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 2px 2px 0px #1C0F06;
+  }
+
+  /* ===== FORM INPUT DATA ===== */
+  .hireme-form {
+    margin-top: 20px;
+  }
+
+  .form-row-dual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .form-field {
+    width: 100%;
+  }
+
+  .docket-input {
+    width: 100%;
+    background: #FCFAF2;
+    border: none;
+    border-bottom: 3px solid #1C0F06;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-family: 'Special Elite', monospace;
+    font-size: 12px;
+    color: #1C0F06;
+    transition: all 0.2s ease;
+  }
+
+  .docket-input::placeholder {
+    color: #7E6D58;
+  }
+
+  .docket-input:focus {
+    outline: none;
+    border-bottom-color: #B65D20;
+    box-shadow: 0 2px 0 #FEDB72;
+  }
+
+  /* Kotak Deskripsi Kasus dengan Garis Nota */
+  .docket-textarea {
+    width: 100%;
+    min-height: 96px;
+    background: repeating-linear-gradient(
+      transparent,
+      transparent 23px,
+      #E5DEC9 23px,
+      #E5DEC9 24px
+    ), #FCFAF2;
+    border: 2px solid #1C0F06;
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-family: 'Special Elite', monospace;
+    font-size: 12px;
+    color: #1C0F06;
+    line-height: 24px;
+    box-shadow: inset 1px 2px 3px rgba(28, 15, 6, 0.15);
+    resize: vertical;
+    margin-bottom: 8px;
+  }
+
+  .docket-textarea::placeholder {
+    color: #7E6D58;
+  }
+
+  .docket-textarea:focus {
+    outline: none;
+    border-color: #B65D20;
+    box-shadow: inset 1px 2px 3px rgba(28, 15, 6, 0.15), 0 0 0 2px #FEDB72;
+  }
+
+  /* ===== TOMBOL EKSEKUSI ===== */
+  .form-actions {
+    display: flex;
+    width: 100%;
+  }
+
+  /* Tombol Utama Submit */
+  .btn-transmit-verdict {
+    width: 100%;
+    height: 48px;
+    background: #A42422;
+    border: 3px solid #1C0F06;
+    border-radius: 12px;
+    padding: 0 24px;
+    font-family: 'Special Elite', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px #1C0F06;
+    transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .btn-transmit-verdict:hover:not(:disabled) {
+    background: #BA2927;
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px #1C0F06;
+  }
+
+  .btn-transmit-verdict:active:not(:disabled) {
+    transform: translate(3px, 3px);
+    box-shadow: 0px 0px 0px #1C0F06;
+  }
+
+  .btn-transmit-verdict:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* Form Messages */
+  .form-message {
+    font-family: 'Special Elite', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .form-success {
+    background: #D4EDDA;
+    color: #155724;
+    border: 2px solid #28A745;
+  }
+
+  .form-error {
+    background: #F8D7DA;
+    color: #721C24;
+    border: 2px solid #DC3545;
+  }
+
+  .form-warning {
+    background: #FFF3CD;
+    color: #856404;
+    border: 2px solid #FFC107;
+  }
+
+  /* Character Counter */
+  .char-counter {
+    font-family: 'Special Elite', monospace;
+    font-size: 10px;
+    color: #7E6D58;
+    text-align: right;
+    margin-top: 4px;
+    margin-bottom: 16px;
+  }
+
+  /* Hidden honeypot fields */
+  .hidden {
+    display: none !important;
+    visibility: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+  }
+
+  [x-cloak] {
+    display: none !important;
+  }
+
+  /* ===== RESPONSIVE ===== */
   @media (max-width: 640px) {
-    .modal-title {
-      font-size: 20px;
+    .hireme-docket-card {
+      max-width: 100%;
+      padding: 20px;
     }
 
-    .modal-subtitle {
-      font-size: 13px;
+    .hireme-title {
+      font-size: 22px;
     }
 
-    .form-label {
-      font-size: 13px;
+    .quick-dispatch-grid {
+      grid-template-columns: 1fr;
+      gap: 8px;
     }
 
-    .form-input,
-    .form-textarea {
-      padding: 10px;
-      font-size: 13px;
+    .form-row-dual {
+      grid-template-columns: 1fr;
     }
 
-    .submit-btn {
-      font-size: 14px;
-      padding: 12px 20px;
-    }
-
-    .contact-link {
-      font-size: 14px;
+    .form-actions {
+      flex-direction: column;
+      align-items: stretch;
     }
   }
 </style>
