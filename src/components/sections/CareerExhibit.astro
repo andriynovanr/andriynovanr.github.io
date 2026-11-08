@@ -1,0 +1,293 @@
+---
+// Career & Experience Tabbed Exhibit Board (IMAGE_60)
+// Main testimony card with three career specialization tabs
+---
+
+<div class="career-exhibit-wrapper">
+  <!-- Main mahogany board -->
+  <div class="career-exhibit-board">
+    <!-- Three tab buttons -->
+    <div class="career-tabs">
+      <!-- Tab 1: Software QA (inactive) -->
+      <button
+        class="career-tab"
+        :class="{ 'career-tab--active': activeCareerTab === 1 }"
+        @click="setCareerTab(1)"
+        aria-label="Software QA tab"
+      >
+        Software QA
+      </button>
+      <!-- Tab 2: Full-Stack & Mobile (default active) -->
+      <button
+        class="career-tab"
+        :class="{ 'career-tab--active': activeCareerTab === 2 }"
+        @click="setCareerTab(2)"
+        aria-label="Full-Stack & Mobile tab"
+      >
+        Full-Stack &amp; Mobile
+      </button>
+      <!-- Tab 3: Pentesting & Bug Bounty (inactive) -->
+      <button
+        class="career-tab"
+        :class="{ 'career-tab--active': activeCareerTab === 3 }"
+        @click="setCareerTab(3)"
+        aria-label="Pentesting & Bug Bounty tab"
+      >
+        Pentesting &amp; Bug Bounty
+      </button>
+    </div>
+
+    <!-- Testimony card container -->
+    <div class="testimony-card">
+      <!-- Tab 1 content: Software QA -->
+      <div x-show="activeCareerTab === 1" x-transition.opacity class="testimony-card-content">
+        <div class="testimony-card-header">
+          <span class="witness-id">WITNESS: ANDRIY NOVAN RAHMAN | QA AUTOMATION ENGINEER</span>
+          <span class="witness-year">2019 – PRESENT</span>
+        </div>
+        <p class="testimony-body">
+          Every defect is evidence. Designing and executing test strategies—manual, automated, and exploratory—across web and mobile platforms demands methodical precision. Selenium, Appium, and Postman are the instruments of this court's quality assurance.
+        </p>
+        <div class="skill-badges">
+          <span class="skill-badge" style="background:#7B3F00;">Selenium / Appium</span>
+          <span class="skill-badge" style="background:#2A5C8A;">Postman / API Testing</span>
+          <span class="skill-badge" style="background:#4A6741;">Test Planning</span>
+          <span class="skill-badge" style="background:#6B3A6B;">Bug Reporting</span>
+        </div>
+      </div>
+
+      <!-- Tab 2 content: Full-Stack & Mobile -->
+      <div x-show="activeCareerTab === 2" x-transition.opacity class="testimony-card-content">
+        <div class="testimony-card-header">
+          <span class="witness-id">WITNESS: ANDRIY NOVAN RAHMAN | LARAVEL &amp; REACT NATIVE DEV</span>
+          <span class="witness-year">2019 – PRESENT</span>
+        </div>
+        <p class="testimony-body">
+          Cross-platform execution is non-negotiable in this court. Building responsive frontend interfaces with React Native and robust backend API architectures with Laravel requires discipline, clean Eloquent schemas, and zero unhandled exceptions.
+        </p>
+        <div class="skill-badges">
+          <span class="skill-badge" style="background:#A82424;">Laravel / PHP</span>
+          <span class="skill-badge" style="background:#2A7685;">React Native</span>
+          <span class="skill-badge" style="background:#764599;">RESTful APIs</span>
+          <span class="skill-badge" style="background:#9E5218;">MySQL / Redis</span>
+        </div>
+      </div>
+
+      <!-- Tab 3 content: Pentesting & Bug Bounty -->
+      <div x-show="activeCareerTab === 3" x-transition.opacity class="testimony-card-content">
+        <div class="testimony-card-header">
+          <span class="witness-id">WITNESS: ANDRIY NOVAN RAHMAN | SECURITY RESEARCHER</span>
+          <span class="witness-year">2021 – PRESENT</span>
+        </div>
+        <p class="testimony-body">
+          The most dangerous vulnerabilities hide in plain sight. Identifying OWASP Top 10 vectors, conducting systematic reconnaissance, and submitting responsible disclosure reports requires both patience and a hacker's intuition.
+        </p>
+        <div class="skill-badges">
+          <span class="skill-badge" style="background:#8B2020;">OWASP / Burp Suite</span>
+          <span class="skill-badge" style="background:#1E5C6B;">Nmap / Recon</span>
+          <span class="skill-badge" style="background:#5C3A8A;">CVE Research</span>
+          <span class="skill-badge" style="background:#6B4A18;">Bug Bounty</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Animation for testimony content */
+@keyframes testimonySlide {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.career-exhibit-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0;
+}
+
+.career-exhibit-board {
+  width: 100%;
+  max-width: 720px;
+  min-width: 0;
+  background: #522D16;
+  border: 4.5px solid #1C0F06;
+  border-radius: 26px;
+  box-shadow: 0px 8px 0px #120A04;
+  padding: 16px 16px 18px 16px;
+}
+
+/* Tab row */
+.career-tabs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+/* Base tab (inactive state) */
+.career-tab {
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 15px;
+  font-weight: bold;
+  background: #A95C22;
+  color: #FCE7A4;
+  border: 2.5px solid #1C0F06;
+  border-radius: 12px;
+  padding: 8px 14px;
+  box-shadow: 0px 3px 0px #1C0F06;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+
+.career-tab:hover {
+  background: #BA6A2D;
+  color: #FEDB72;
+  transform: translateY(-2px);
+  box-shadow: 0px 5px 0px #1C0F06;
+}
+
+.career-tab:active {
+  transform: translateY(2px);
+  box-shadow: 0px 1px 0px #1C0F06;
+}
+
+/* Active tab state */
+.career-tab--active {
+  background: #B7D938;
+  color: #1C0F06;
+  border: 3px solid #1C0F06;
+  border-radius: 12px;
+  padding: 8px 14px;
+  box-shadow: 0px 4px 0px #1C0F06;
+  font-size: 16px;
+  font-weight: 900;
+  transform: translateY(0);
+}
+
+.career-tab--active:hover {
+  background: #C3E840;
+  color: #1C0F06;
+  transform: translateY(-1px);
+  box-shadow: 0px 5px 0px #1C0F06;
+}
+
+/* Inner parchment testimony card */
+.testimony-card {
+  background: #ECE4CE;
+  border: 3px solid #1C0F06;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: inset 0 2px 4px rgba(28, 15, 6, 0.08);
+  min-height: 160px;
+}
+
+.testimony-card-content {
+  animation: testimonySlide 0.25s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+/* Card header row */
+.testimony-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #1C0F06;
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.witness-id {
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 10.5px;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  color: #1C0F06;
+  flex: 1;
+  min-width: 0;
+}
+
+.witness-year {
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 10.5px;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  color: rgba(28, 15, 6, 0.85);
+  white-space: nowrap;
+}
+
+/* Testimony body text */
+.testimony-body {
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  color: #1C0F06;
+  margin: 0 0 14px 0;
+}
+
+/* Skill badge row */
+.skill-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-badge {
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 10.5px;
+  font-weight: bold;
+  color: #FDF5E2;
+  border: 2px solid #1C0F06;
+  border-radius: 8px;
+  padding: 5px 12px;
+  box-shadow: 2px 2px 0px #1C0F06;
+  cursor: default;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: inline-block;
+}
+
+.skill-badge:hover {
+  transform: translateY(-1.5px) scale(1.02);
+  box-shadow: 3px 3px 0px #1C0F06;
+}
+
+/* Mobile responsive */
+@media (max-width: 760px) {
+  .career-exhibit-board {
+    border-radius: 20px;
+  }
+  
+  .career-tabs {
+    gap: 8px;
+  }
+  
+  .career-tab {
+    font-size: 13px;
+    padding: 7px 11px;
+  }
+  
+  .career-tab--active {
+    font-size: 14px;
+    padding: 7px 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimony-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .skill-badges {
+    flex-direction: column;
+  }
+  
+  .skill-badge {
+    text-align: center;
+  }
+}
+</style>

@@ -5,7 +5,8 @@ import BottomNav from '../components/navigation/BottomNav.astro';
 import HeroCard from '../components/hero/HeroCard.astro';
 import EnvelopeSection from '../components/hero/EnvelopeSection.astro';
 import TestimonyPlaque from '../components/hero/TestimonyPlaque.astro';
-import CareerSection from '../components/sections/CareerSection.astro';
+import CareerPlaque from '../components/sections/CareerPlaque.astro';
+import CareerExhibit from '../components/sections/CareerExhibit.astro';
 import ModalEnvelope from '../components/modals/ModalEnvelope.astro';
 import ModalSkills from '../components/modals/ModalSkills.astro';
 import ModalContact from '../components/modals/ModalContact.astro';
@@ -30,8 +31,11 @@ import ModalContact from '../components/modals/ModalContact.astro';
       <TestimonyPlaque />
     </div>
 
-    <!-- Career & experience tabbed section -->
-    <CareerSection />
+    <!-- Career & Experience Section -->
+    <div class="career-section">
+      <CareerPlaque />
+      <CareerExhibit />
+    </div>
   </main>
 
   <!-- Modals (hidden until triggered) -->

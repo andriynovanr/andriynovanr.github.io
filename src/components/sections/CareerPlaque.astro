@@ -1,0 +1,125 @@
+---
+// Career & Experience Title Plaque (IMAGE_59)
+// Courtroom exhibit title board with microphone clip decoration
+---
+
+<div class="career-plaque-wrapper">
+  <div class="career-plaque">
+    <!-- Microphone clip decoration (top-right corner) -->
+    <div class="mic-clip">
+      <div class="mic-bar"></div>
+      <div class="mic-bar"></div>
+      <div class="mic-capsule"></div>
+    </div>
+    
+    <!-- Plaque content -->
+    <div class="career-plaque-inner">
+      <p class="plaque-sublabel">COURT RECORD • EXHIBIT B</p>
+      <h2 class="plaque-title">Career & Experience</h2>
+    </div>
+  </div>
+</div>
+
+<style>
+.career-plaque-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+  z-index: 20;
+}
+
+.career-plaque {
+  position: relative;
+  width: 100%;
+  max-width: 390px;
+  min-width: 300px;
+  height: 100px;
+  background: linear-gradient(135deg, #BD8D58 0%, #BA8A55 50%, #B48550 100%);
+  border: 4.5px solid #1C0F06;
+  border-radius: 22px;
+  box-shadow: 0px 6px 0px #140B05;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.career-plaque:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 0px #140B05;
+}
+
+.career-plaque-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.plaque-sublabel {
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.18em;
+  color: rgba(28, 15, 6, 0.9);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.plaque-title {
+  font-family: 'Patrick Hand', 'Special Elite', cursive;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: #180D05;
+  margin: 0;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* Microphone clip in top-right corner */
+.mic-clip {
+  position: absolute;
+  right: 28px;
+  top: -14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 25;
+}
+
+.mic-bar {
+  width: 2.5px;
+  height: 22px;
+  background: #9E6E22;
+  border: 0.5px solid #1C0F06;
+  margin-bottom: 0;
+}
+
+.mic-capsule {
+  width: 36px;
+  height: 14px;
+  background: #262626;
+  border: 2.5px solid #1C0F06;
+  border-radius: 7px;
+  box-shadow: 2px 3px 0px #140B05;
+  margin-top: -1px;
+}
+
+@media (max-width: 480px) {
+  .career-plaque {
+    max-width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 88px;
+  }
+  
+  .plaque-title {
+    font-size: 24px;
+  }
+}
+</style>
