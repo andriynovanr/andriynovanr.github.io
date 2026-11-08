@@ -334,6 +334,11 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
           this.closeAllModals();
         }
       });
+      
+      // Listen for custom close modal event from form submission
+      window.addEventListener('close-modal', () => {
+        this.closeAllModals();
+      });
     },
 
     openModal(name: string) {
