@@ -47,7 +47,7 @@
   --z-floor: -5;
   --z-content: 1;
   --z-nav: 40;
-  --z-modal: 50;
+  --z-modal: 100;
 }
 
 /* ============================================
@@ -81,7 +81,7 @@ body {
                 #6b4423 80px
               );
   background-attachment: fixed;
-  min-height: 1400px;
+  min-height: 2000px;
   position: relative;
   z-index: -1;
   overflow-x: hidden;
@@ -217,7 +217,7 @@ body {
   padding: var(--spacing-page);
   max-width: var(--container-max);
   margin: 0 auto;
-  min-height: 1400px;
+  min-height: 2000px;
   position: relative;
   z-index: var(--z-content);
 }
