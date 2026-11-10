@@ -1,0 +1,285 @@
+---
+// WallClock - Vintage courtroom wall clock with real-time Jakarta time
+---
+
+<div 
+  class="wall-clock-widget" 
+  title="Jakarta Time (WIB) • UTC+7 • Available for Global Remote & Async Contracts"
+>
+  <!-- SVG Clock Face -->
+  <svg 
+    class="wall-clock-svg" 
+    viewBox="0 0 160 160" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <!-- Wall Mount Peg -->
+    <circle cx="80" cy="8" r="6" fill="#D8A25E" stroke="#1C0F06" stroke-width="2"/>
+    <circle cx="80" cy="8" r="1.8" fill="#1C0F06"/>
+    
+    <!-- Outer Dark Wood Rim -->
+    <circle cx="80" cy="80" r="72" fill="#4A2810" stroke="#1C0F06" stroke-width="3.5"/>
+    
+    <!-- Caramel Wood Ring -->
+    <circle cx="80" cy="80" r="67" fill="#A6682B" stroke="#1C0F06" stroke-width="1.5"/>
+    
+    <!-- Brass Inner Ring -->
+    <circle cx="80" cy="80" r="61" fill="#E5B869" stroke="#1C0F06" stroke-width="1"/>
+    
+    <!-- Parchment Dial Face -->
+    <circle cx="80" cy="80" r="57" fill="#F5EEDB" stroke="#1C0F06" stroke-width="2"/>
+    
+    <!-- Minute Dots Ring -->
+    <circle cx="80" cy="80" r="51" fill="none" stroke="#1C0F06" stroke-width="1.2" stroke-dasharray="1.5, 4.4"/>
+    
+    <!-- Hour Numerals (12, 3, 6, 9) -->
+    <text x="80" y="34" text-anchor="middle" font-family="'Special Elite', 'Courier New', monospace" font-size="14" font-weight="bold" fill="#1C0F06">12</text>
+    <text x="122" y="85" text-anchor="middle" font-family="'Special Elite', 'Courier New', monospace" font-size="14" font-weight="bold" fill="#1C0F06">3</text>
+    <text x="80" y="134" text-anchor="middle" font-family="'Special Elite', 'Courier New', monospace" font-size="14" font-weight="bold" fill="#1C0F06">6</text>
+    <text x="38" y="85" text-anchor="middle" font-family="'Special Elite', 'Courier New', monospace" font-size="14" font-weight="bold" fill="#1C0F06">9</text>
+    
+    <!-- Other Hour Dots -->
+    <circle cx="101" cy="43" r="2" fill="#1C0F06"/>  <!-- 1 o'clock -->
+    <circle cx="116" cy="59" r="2" fill="#1C0F06"/>  <!-- 2 o'clock -->
+    <circle cx="116" cy="101" r="2" fill="#1C0F06"/> <!-- 4 o'clock -->
+    <circle cx="101" cy="117" r="2" fill="#1C0F06"/> <!-- 5 o'clock -->
+    <circle cx="59" cy="117" r="2" fill="#1C0F06"/>  <!-- 7 o'clock -->
+    <circle cx="44" cy="101" r="2" fill="#1C0F06"/>  <!-- 8 o'clock -->
+    <circle cx="44" cy="59" r="2" fill="#1C0F06"/>   <!-- 10 o'clock -->
+    <circle cx="59" cy="43" r="2" fill="#1C0F06"/>   <!-- 11 o'clock -->
+    
+    <!-- Label Texts -->
+    <text x="80" y="47" text-anchor="middle" font-family="'Special Elite', 'Courier New', monospace" font-size="7" font-weight="bold" letter-spacing="0.12em" fill="#4A3728">COURT TIME</text>
+    <text x="80" y="112" text-anchor="middle" font-family="'Special Elite', 'Courier New', monospace" font-size="6" font-weight="bold" letter-spacing="0.08em" fill="#2A5946">JAKARTA • WIB</text>
+    
+    <!-- Clock Hands -->
+    <!-- Hour Hand (Spade shape) -->
+    <polygon id="hour-hand" points="80,50 83,66 80,72 77,66" fill="#1C0F06" stroke="#1C0F06" stroke-width="1" style="transform-origin: 80px 80px"/>
+    
+    <!-- Minute Hand (Tapered sword) -->
+    <polygon id="minute-hand" points="80,34 82,62 80,70 78,62" fill="#1C0F06" stroke="#1C0F06" stroke-width="0.5" style="transform-origin: 80px 80px"/>
+    
+    <!-- Second Hand Group (line + tail) -->
+    <g id="second-group" style="transform-origin: 80px 80px">
+      <line x1="80" y1="92" x2="80" y2="32" stroke="#C42B28" stroke-width="1.2" stroke-linecap="round"/>
+      <polygon points="80,88 82,80 78,80" fill="#C42B28"/>
+    </g>
+    
+    <!-- Center Pin Assembly -->
+    <circle cx="80" cy="80" r="4.5" fill="#D8A25E" stroke="#1C0F06" stroke-width="1"/>
+    <circle cx="80" cy="80" r="2.5" fill="#C42B28"/>
+    <circle cx="80" cy="80" r="1" fill="#FFF1A8"/>
+  </svg>
+  
+  <!-- Clock Connector Lines -->
+  <div class="clock-connector">
+    <div class="connector-line"></div>
+    <div class="connector-line"></div>
+  </div>
+  
+  <!-- Digital Plate -->
+  <div class="digital-plate">
+    <div id="digital-time" class="digital-time">00:00:00 WIB</div>
+    <div class="plate-divider"></div>
+    <div class="status-row">
+      <span id="status-dot" class="status-dot"></span>
+      <span id="status-text" class="status-text">OFF-HOURS / ASYNC</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ============================================
+     WALL CLOCK WIDGET CONTAINER
+     ============================================ */
+  .wall-clock-widget {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    z-index: 90;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+  
+  /* ============================================
+     SVG CLOCK STYLING
+     ============================================ */
+  .wall-clock-svg {
+    width: 140px;
+    height: 140px;
+    filter: drop-shadow(4px 6px 0px #140B05);
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.2s ease;
+  }
+  
+  .wall-clock-widget:hover .wall-clock-svg {
+    transform: translateY(-2px);
+    filter: drop-shadow(4px 8px 0px #140B05);
+  }
+  
+  /* Second hand smooth mechanical tick animation */
+  #second-group {
+    transform-origin: 80px 80px;
+    transition: transform 0.1s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+  }
+  
+  #hour-hand,
+  #minute-hand {
+    transform-origin: 80px 80px;
+  }
+  
+  /* ============================================
+     CLOCK CONNECTOR LINES
+     ============================================ */
+  .clock-connector {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .connector-line {
+    width: 1.5px;
+    height: 6px;
+    background: #1C0F06;
+  }
+  
+  /* ============================================
+     DIGITAL PLATE
+     ============================================ */
+  .digital-plate {
+    width: 132px;
+    height: 44px;
+    background: #26150B;
+    border: 2.5px solid #1C0F06;
+    border-radius: 10px;
+    box-shadow: 2px 4px 0px #140B05;
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+  }
+  
+  .digital-time {
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: #F5D15E;
+    text-shadow: 0 0 6px rgba(245, 209, 94, 0.4);
+    text-align: center;
+    white-space: nowrap;
+  }
+  
+  .plate-divider {
+    height: 1px;
+    background: #4A2810;
+    margin: 1px 0;
+  }
+  
+  .status-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    background: #F5D15E;
+  }
+  
+  .status-dot.pulse {
+    animation: status-pulse 2s infinite;
+  }
+  
+  @keyframes status-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  
+  .status-text {
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #F5D15E;
+    white-space: nowrap;
+  }
+  
+  /* ============================================
+     RESPONSIVE ADJUSTMENTS
+     ============================================ */
+  @media (max-width: 768px) {
+    .wall-clock-widget {
+      top: 50px;
+      right: 15px;
+      transform: scale(0.85);
+      transform-origin: top right;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .wall-clock-widget {
+      top: 45px;
+      right: 10px;
+      transform: scale(0.75);
+      transform-origin: top right;
+    }
+  }
+</style>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    const jakartaTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }));
+    
+    const hours = jakartaTime.getHours();
+    const minutes = jakartaTime.getMinutes();
+    const seconds = jakartaTime.getSeconds();
+    
+    const secondAngle = seconds * 6;
+    const minuteAngle = minutes * 6 + seconds * 0.1;
+    const hourAngle = (hours % 12) * 30 + minutes * 0.5;
+    
+    const hourHand = document.getElementById('hour-hand');
+    const minuteHand = document.getElementById('minute-hand');
+    const secondGroup = document.getElementById('second-group');
+    
+    if (hourHand) hourHand.style.transform = `rotate(${hourAngle}deg)`;
+    if (minuteHand) minuteHand.style.transform = `rotate(${minuteAngle}deg)`;
+    if (secondGroup) secondGroup.style.transform = `rotate(${secondAngle}deg)`;
+    
+    const digitalTime = document.getElementById('digital-time');
+    if (digitalTime) {
+      digitalTime.textContent = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')} WIB`;
+    }
+    
+    const isWorkHours = hours >= 9 && hours < 18;
+    const statusDot = document.getElementById('status-dot');
+    const statusText = document.getElementById('status-text');
+    
+    if (statusDot && statusText) {
+      if (isWorkHours) {
+        statusDot.style.backgroundColor = '#52C41A';
+        statusDot.classList.remove('pulse');
+        statusText.textContent = 'COURT IN SESSION';
+        statusText.style.color = '#B7D938';
+      } else {
+        statusDot.style.backgroundColor = '#F5D15E';
+        statusDot.classList.add('pulse');
+        statusText.textContent = 'OFF-HOURS / ASYNC';
+        statusText.style.color = '#F5D15E';
+      }
+    }
+  }
+  
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
