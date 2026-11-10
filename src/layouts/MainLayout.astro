@@ -27,8 +27,10 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
-        height: 1400px;
+        width: 100%;
+        min-width: 100vw;
+        min-height: 100vh;
+        height: auto;
         z-index: -10;
         pointer-events: none;
       }
@@ -38,16 +40,18 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
+        width: 100%;
+        min-width: 100%;
         height: 600px;
         display: flex;
         align-items: stretch;
         justify-content: flex-start;
-        overflow: hidden;
+        overflow: visible;
       }
 
       /* Bilah papan kayu vertikal lebar dengan efek silinder */
       .upper-wall-plank {
+        min-width: 145px;
         width: 145px;
         height: 100%;
         flex-shrink: 0;
@@ -110,7 +114,8 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         position: absolute;
         top: 600px;
         left: 0;
-        right: 0;
+        width: 100%;
+        min-width: 100%;
         height: 150px;
         background: linear-gradient(
           180deg,
@@ -124,6 +129,7 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         align-items: stretch;
         justify-content: flex-start;
         border-bottom: 4px solid #1A0F07;
+        overflow: visible;
       }
 
       .wood-plank-middle {
@@ -214,13 +220,16 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         }
       }
 
-      /* ZONA 4: Lantai Biru Toska - Courtroom Floor (802px - 1400px, 42.7%) */
+      /* ZONA 4: Lantai Biru Toska - Courtroom Floor (802px - extends to page bottom) */
       .courtroom-floor-bg {
         position: absolute;
         top: 802px;
         left: 0;
         right: 0;
-        height: 598px;
+        width: 100%;
+        min-width: 100%;
+        height: calc(100% - 802px);
+        min-height: calc(100vh - 802px);
         background: linear-gradient(
           180deg,
           #1E535F 0%,
@@ -252,11 +261,51 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         <div class="upper-wall-plank"></div>
         <div class="upper-wall-plank"></div>
         <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
         <div class="upper-wall-vertical-fade"></div>
       </div>
 
       <!-- ZONA 2: Panel Kayu Tengah (510-630px) -->
       <div class="wood-panel-middle-bg">
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
         <div class="wood-plank-middle"></div>
         <div class="wood-plank-middle"></div>
         <div class="wood-plank-middle"></div>
@@ -311,6 +360,7 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
 </html>
 
 <script>
+  // @ts-ignore - AlpineJS loaded via CDN
   import Alpine from 'alpinejs';
 
   Alpine.data('portfolioApp', () => ({
@@ -355,10 +405,36 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
       this.isSoundOn = !this.isSoundOn;
     },
 
-    setCareerTab(tab) {
+    setCareerTab(tab: number) {
       this.activeCareerTab = tab;
     }
   }));
 
   Alpine.start();
+  
+  // Adjust background wrapper height to match page content (with extra padding for zoom out)
+  function adjustBackgroundHeight() {
+    const pageContent = document.querySelector('.page-content');
+    const bgWrapper = document.querySelector('.courtroom-backgrounds-wrapper');
+    
+    if (pageContent && bgWrapper) {
+      const contentHeight = pageContent.offsetHeight;
+      const viewportHeight = window.innerHeight;
+      
+      // Add 50% extra height to account for zoom out scenarios (25%, 33%, etc)
+      const minHeight = Math.max(contentHeight * 1.5, viewportHeight * 1.5);
+      
+      bgWrapper.style.height = minHeight + 'px';
+    }
+  }
+  
+  // Run on load and resize
+  window.addEventListener('load', adjustBackgroundHeight);
+  window.addEventListener('resize', adjustBackgroundHeight);
+  
+  // Run initially with a small delay to ensure content is rendered
+  setTimeout(adjustBackgroundHeight, 100);
+  
+  // Also run after a longer delay to catch any late-loading content
+  setTimeout(adjustBackgroundHeight, 500);
 </script>

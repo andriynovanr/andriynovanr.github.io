@@ -10,6 +10,7 @@ import CareerExhibit from '../components/sections/CareerExhibit.astro';
 import ModalEnvelope from '../components/modals/ModalEnvelope.astro';
 import ModalSkills from '../components/modals/ModalSkills.astro';
 import ModalContact from '../components/modals/ModalContact.astro';
+import WallClock from '../components/hud/WallClock.astro';
 ---
 
 <MainLayout title="Andriy Novan Rahman — Court Dossier">
@@ -37,6 +38,9 @@ import ModalContact from '../components/modals/ModalContact.astro';
       <CareerExhibit />
     </div>
   </main>
+
+  <!-- Wall Clock HUD -->
+  <WallClock />
 
   <!-- Modals (hidden until triggered) -->
   <ModalEnvelope />
