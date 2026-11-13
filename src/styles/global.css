@@ -81,7 +81,7 @@ body {
                 #6b4423 80px
               );
   background-attachment: fixed;
-  min-height: 2000px;
+  min-height: 100vh;
   position: relative;
   z-index: -1;
   overflow-x: hidden;
@@ -189,24 +189,30 @@ body {
 }
 
 /* ============================================
-   SCROLLBAR STYLING
+   SCROLLBAR STYLING - HIDDEN BUT FUNCTIONAL
    ============================================ */
 
-::-webkit-scrollbar {
-  width: 12px;
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--color-wood-mid);
+/* Hide scrollbar for IE, Edge and Firefox */
+body,
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--color-wood-dark);
-  border-radius: 6px;
+/* Also hide for modal content scrollbar */
+.modal-content::-webkit-scrollbar {
+  display: none;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-burgundy);
+.modal-content {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* ============================================
@@ -217,7 +223,6 @@ body {
   padding: var(--spacing-page);
   max-width: var(--container-max);
   margin: 0 auto;
-  min-height: 2000px;
   position: relative;
   z-index: var(--z-content);
 }

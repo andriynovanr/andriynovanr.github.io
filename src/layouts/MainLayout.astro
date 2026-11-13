@@ -30,7 +30,7 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         width: 100%;
         min-width: 100vw;
         min-height: 100vh;
-        height: auto;
+        height: 100%;
         z-index: -10;
         pointer-events: none;
       }
@@ -414,6 +414,7 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
   
   // Adjust background wrapper height to match page content (with extra padding for zoom out)
   function adjustBackgroundHeight() {
+    const body = document.body;
     const pageContent = document.querySelector('.page-content');
     const bgWrapper = document.querySelector('.courtroom-backgrounds-wrapper');
     
@@ -421,10 +422,14 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
       const contentHeight = pageContent.offsetHeight;
       const viewportHeight = window.innerHeight;
       
-      // Add 50% extra height to account for zoom out scenarios (25%, 33%, etc)
-      const minHeight = Math.max(contentHeight * 1.5, viewportHeight * 1.5);
+      // Calculate proper height: content + padding, with 2x multiplier for zoom out coverage
+      const calculatedHeight = Math.max(contentHeight + 200, viewportHeight);
+      const finalHeight = calculatedHeight * 2; // 2x untuk cover zoom out 50%, 33%, 25%
       
-      bgWrapper.style.height = minHeight + 'px';
+      bgWrapper.style.height = finalHeight + 'px';
+      
+      // Set body height to match content + padding only (no extra scroll)
+      body.style.height = (contentHeight + 200) + 'px';
     }
   }
   
@@ -437,4 +442,5 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
   
   // Also run after a longer delay to catch any late-loading content
   setTimeout(adjustBackgroundHeight, 500);
+  setTimeout(adjustBackgroundHeight, 1000);
 </script>
