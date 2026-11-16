@@ -495,14 +495,7 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
   import Alpine from 'alpinejs';
 
   Alpine.data('portfolioApp', () => ({
-    showEnvelopeModal: false,
-    showSkillsModal: false,
     showContactModal: false,
-    showProjectModal: false,
-    currentProjectIndex: 0,
-    isSoundOn: true,
-    sanityLevel: 85,
-    activeCareerTab: 2,
     darkMode: false,
 
     init() {
@@ -530,25 +523,11 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
 
     openModal(name: string) {
       this.closeAllModals();
-      if (name === 'envelope') this.showEnvelopeModal = true;
-      if (name === 'skills') this.showSkillsModal = true;
       if (name === 'contact') this.showContactModal = true;
-      if (name === 'project') this.showProjectModal = true;
     },
 
     closeAllModals() {
-      this.showEnvelopeModal = false;
-      this.showSkillsModal = false;
       this.showContactModal = false;
-      this.showProjectModal = false;
-    },
-
-    toggleSound() {
-      this.isSoundOn = !this.isSoundOn;
-    },
-
-    setCareerTab(tab: number) {
-      this.activeCareerTab = tab;
     }
   }));
 
