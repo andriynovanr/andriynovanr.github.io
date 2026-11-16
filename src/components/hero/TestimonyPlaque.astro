@@ -1,5 +1,5 @@
 ---
-// TestimonyPlaque - Papan Deskripsi Saksi
+// TestimonyPlaque - Papan Deskripsi Saksi dengan Typewriter Effect
 ---
 
 <div class="testimony-plaque">
@@ -10,9 +10,9 @@
   
   <!-- Wadah Utama -->
   <div class="testimony-content">
-    <!-- Teks Pernyataan -->
-    <p class="testimony-statement">
-      Hello, I'm Andriy. I test, break, and build web and mobile apps. My job is ensuring your code survives the harshest cross-examinations.
+    <!-- Teks Pernyataan dengan Typewriter Effect -->
+    <p class="testimony-statement" id="testimony-text">
+      <span class="typed-text"></span><span class="caret"></span>
     </p>
     
     <!-- Garis Pembatas -->
@@ -80,6 +80,35 @@
     color: #1A1208;
     line-height: 1.6;
     margin: 0 0 16px 0;
+    min-height: 200px;
+  }
+
+  .typed-text {
+    display: inline;
+  }
+
+  /* Kursor Balok Kedip (Blinking Caret) */
+  .caret {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background: #8B1A1A;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    opacity: 0;
+    animation: none;
+  }
+
+  /* Kursor muncul dan berkedip hanya setelah selesai mengetik */
+  .caret.finished {
+    opacity: 1;
+    animation: blink 0.8s infinite step-end;
+  }
+
+  /* Animasi Kedip Kursor */
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 
   /* Garis Pembatas */
@@ -204,3 +233,213 @@
     }
   }
 </style>
+
+<script>
+  // ============================================
+  // TYPEWRITER ENGINE WITH RETRO BLIP SFX
+  // ============================================
+  
+  // Teks lengkap yang akan diketik
+  const fullText: string = "Hi! I'm Andriy Novan Rahman, a Software Engineering graduate from Telkom University Surabaya. At Minilemon Technology I worked as a QA intern, writing test cases and catching bugs before release on web and mobile apps built with Laravel and React Native. My automated regression suite reduced manual smoke testing time by over 40%. On my own time I practice web application penetration testing and bug bounty hunting, isolating regressions and uncovering exploit vectors.";
+  
+  // State Management
+  let typewriterActive: boolean = false;
+  let currentTimeout: number | null = null;
+  let audioContext: AudioContext | null = null;
+  let audioReady: boolean = false;
+  
+  // Audio Context Initialization (Lazy Load)
+  function getAudioContext(): AudioContext {
+    if (!audioContext) {
+      try {
+        audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+        console.log('AudioContext created, state:', audioContext.state);
+      } catch (error) {
+        console.error('Failed to create AudioContext:', error);
+      }
+    }
+    return audioContext!;
+  }
+  
+  // Generator Efek Suara Sintetis (Zero-Asset Web Audio API)
+  function playTypewriterBlip(): void {
+    try {
+      const ctx: AudioContext = getAudioContext();
+      
+      // Auto-resume jika suspended (agresif)
+      if (ctx.state === 'suspended') {
+        ctx.resume().catch(() => {
+          // Silent fail
+        });
+      }
+      
+      // Create oscillator (triangle wave untuk karakter retro hangat)
+      const oscillator: OscillatorNode = ctx.createOscillator();
+      oscillator.type = 'triangle';
+      
+      // Frekuensi diacak ±40Hz untuk variasi natural (600-950Hz)
+      const baseFreq: number = 775;
+      const randomOffset: number = (Math.random() - 0.5) * 80; // ±40Hz
+      oscillator.frequency.setValueAtTime(baseFreq + randomOffset, ctx.currentTime);
+      
+      // Gain node untuk volume control dengan envelope decay (volume lebih keras untuk konsistensi)
+      const gainNode: GainNode = ctx.createGain();
+      gainNode.gain.setValueAtTime(0.18, ctx.currentTime); // Volume awal 0.18 (lebih keras)
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03); // Decay 30ms
+      
+      // Connect nodes
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      
+      // Play sound (durasi 35ms)
+      oscillator.start(ctx.currentTime);
+      oscillator.stop(ctx.currentTime + 0.035);
+      
+    } catch (error) {
+      // Silent fail jika browser tidak support Web Audio API
+      console.warn('Web Audio API error:', error);
+    }
+  }
+  
+  // Warm-up audio dengan dummy silent blip (trick untuk activate AudioContext)
+  function warmUpAudio(): void {
+    try {
+      const ctx: AudioContext = getAudioContext();
+      
+      // Resume context agresif
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+      
+      // Buat silent dummy oscillator untuk "warm up" audio engine
+      const oscillator: OscillatorNode = ctx.createOscillator();
+      const gainNode: GainNode = ctx.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      
+      // Volume 0 (tidak terdengar, hanya untuk aktivasi)
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      
+      // Start dan stop cepat
+      oscillator.start(ctx.currentTime);
+      oscillator.stop(ctx.currentTime + 0.001);
+      
+      console.log('Audio warmed up, state:', ctx.state);
+    } catch (error) {
+      console.warn('Audio warm-up failed:', error);
+    }
+  }
+  
+  // Mesin Pengetik Logika (Typewriter Loop Engine)
+  function typeWriter(text: string, element: HTMLElement, caretElement: HTMLElement, index: number = 0): void {
+    // Guard: Cek apakah masih aktif
+    if (!typewriterActive) return;
+    
+    // Base case: Selesai mengetik
+    if (index >= text.length) {
+      typewriterActive = false;
+      // Tampilkan kursor hanya setelah selesai
+      caretElement.classList.add('finished');
+      return;
+    }
+    
+    // Ambil karakter saat ini
+    const char: string = text.charAt(index);
+    
+    // Tambahkan karakter ke elemen
+    element.textContent += char;
+    
+    // Play sound hanya untuk karakter non-spasi dan non-punctuation silence
+    if (char !== ' ' && char !== '.' && char !== ',') {
+      playTypewriterBlip();
+    }
+    
+    // Tentukan delay untuk karakter berikutnya
+    let delay: number = 30; // Default 30ms (standar)
+    
+    // Micro-pause untuk tanda baca
+    if (char === ',') {
+      delay = 120; // Jeda koma 120ms
+    } else if (char === '.') {
+      delay = 250; // Jeda titik 250ms (jeda kalimat)
+    } else {
+      // Variasi kecil untuk natural feel (25-35ms)
+      delay = 25 + Math.random() * 10;
+    }
+    
+    // Schedule karakter berikutnya
+    currentTimeout = window.setTimeout(() => {
+      typeWriter(text, element, caretElement, index + 1);
+    }, delay);
+  }
+  
+  // Fungsi Start Typewriter
+  function startTypewriter(): void {
+    // Debounce: Batalkan typewriter sebelumnya jika masih berjalan
+    if (typewriterActive && currentTimeout !== null) {
+      clearTimeout(currentTimeout);
+      typewriterActive = false;
+    }
+    
+    // Reset text
+    const textElement = document.querySelector('.typed-text') as HTMLElement | null;
+    const caretElement = document.querySelector('.caret') as HTMLElement | null;
+    
+    if (!textElement || !caretElement) return;
+    
+    textElement.textContent = '';
+    // Sembunyikan kursor saat mulai mengetik
+    caretElement.classList.remove('finished');
+    
+    // Start typing
+    typewriterActive = true;
+    
+    // Small delay before start (dramatic pause)
+    setTimeout(() => {
+      typeWriter(fullText, textElement, caretElement);
+    }, 300);
+  }
+  
+  // Auto-start ketika halaman dimuat
+  window.addEventListener('load', () => {
+    // CRITICAL: Initialize dan warm-up audio SEGERA
+    warmUpAudio();
+    
+    // Delay minimal untuk typewriter (200ms cukup)
+    setTimeout(() => {
+      startTypewriter();
+    }, 200);
+  });
+  
+  // AGRESIF: Auto-resume audio pada SETIAP event yang mungkin
+  function forceResumeAudio(): void {
+    const ctx = getAudioContext();
+    if (ctx.state === 'suspended') {
+      ctx.resume().then(() => {
+        console.log('AudioContext force-resumed');
+      }).catch(() => {
+        // Silent
+      });
+    }
+  }
+  
+  // Multi-event listeners untuk memastikan audio aktif ASAP
+  const immediateEvents = ['click', 'keydown', 'touchstart', 'mousemove', 'scroll'];
+  immediateEvents.forEach(eventType => {
+    document.addEventListener(eventType, forceResumeAudio, { once: true, capture: true });
+  });
+  
+  // Fallback: Coba resume setiap 100ms sampai berhasil (max 10x)
+  let resumeAttempts = 0;
+  const resumeInterval = setInterval(() => {
+    const ctx = getAudioContext();
+    if (ctx.state === 'running' || resumeAttempts >= 10) {
+      clearInterval(resumeInterval);
+      console.log('Audio ready after', resumeAttempts, 'attempts');
+    } else {
+      ctx.resume().catch(() => {});
+      resumeAttempts++;
+    }
+  }, 100);
+</script>

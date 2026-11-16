@@ -2,11 +2,12 @@
 // HangingLamp - Lampu gantung hijau banker's lamp dengan efek sinar cahaya
 ---
 
-<div class="hanging-lamp-container" x-data="{ lampOn: true }">
+<div class="hanging-lamp-container" x-data="{ lampOn: true, swinging: false }">
   <!-- Lapisan 1: Pendaran Cahaya Melingkar Lembut (Ambient Radial Glow) -->
   <div 
     class="lamp-ambient-glow" 
     x-show="lampOn"
+    :class="{ 'swing-glow': swinging }"
     x-transition:enter="transition ease-out duration-500"
     x-transition:enter-start="opacity-0"
     x-transition:enter-end="opacity-100"
@@ -19,6 +20,7 @@
   <div 
     class="lamp-downward-cone" 
     x-show="lampOn"
+    :class="{ 'swing-cone': swinging }"
     x-transition:enter="transition ease-out duration-500"
     x-transition:enter-start="opacity-0"
     x-transition:enter-end="opacity-100"
@@ -28,13 +30,13 @@
   ></div>
 
   <!-- Gambar Lampu dengan Rantai Tarikan -->
-  <div class="lamp-fixture" :class="{ 'lamp-off': !lampOn }">
+  <div class="lamp-fixture" :class="{ 'lamp-off': !lampOn, 'swing-lamp': swinging }">
     <img 
       src="/icons/icon_lamp.png" 
       alt="Banker's Hanging Lamp" 
       class="lamp-image"
-      @click="lampOn = !lampOn"
-      title="Click to toggle lamp"
+      @click="lampOn = !lampOn; swinging = true; setTimeout(() => swinging = false, 2000); window.dispatchEvent(new CustomEvent('lamp-toggle', { detail: { lampOn: lampOn } }))"
+      title="Click to toggle lamp & theme"
     />
   </div>
 </div>
@@ -45,7 +47,7 @@
      ============================================ */
   .hanging-lamp-container {
     position: absolute;
-    top: 0;
+    top: 70px;
     left: 70px;
     width: 120px;
     height: 130px;
@@ -140,6 +142,69 @@
 
   .lamp-image:active {
     transform: scale(0.98);
+  }
+
+  /* ============================================
+     ANIMASI SWING (GOYANG REALISTIS)
+     Simulasi lampu gantung yang ditarik dengan fisika pendulum
+     ============================================ */
+  @keyframes swing {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(8deg); }
+    20% { transform: rotate(-6deg); }
+    30% { transform: rotate(4deg); }
+    40% { transform: rotate(-3deg); }
+    50% { transform: rotate(2deg); }
+    60% { transform: rotate(-1.5deg); }
+    70% { transform: rotate(1deg); }
+    80% { transform: rotate(-0.5deg); }
+    90% { transform: rotate(0.3deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  /* Animasi untuk fixture lampu */
+  .swing-lamp {
+    animation: swing 2s ease-in-out;
+    transform-origin: top center;
+  }
+
+  /* Animasi untuk cahaya ambient glow (ikut bergoyang) */
+  @keyframes swing-glow {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    10% { transform: translate(-50%, -50%) rotate(4deg); }
+    20% { transform: translate(-50%, -50%) rotate(-3deg); }
+    30% { transform: translate(-50%, -50%) rotate(2deg); }
+    40% { transform: translate(-50%, -50%) rotate(-1.5deg); }
+    50% { transform: translate(-50%, -50%) rotate(1deg); }
+    60% { transform: translate(-50%, -50%) rotate(-0.8deg); }
+    70% { transform: translate(-50%, -50%) rotate(0.5deg); }
+    80% { transform: translate(-50%, -50%) rotate(-0.3deg); }
+    90% { transform: translate(-50%, -50%) rotate(0.2deg); }
+    100% { transform: translate(-50%, -50%) rotate(0deg); }
+  }
+
+  .swing-glow {
+    animation: swing-glow 2s ease-in-out;
+  }
+
+  /* Animasi untuk kerucut cahaya (ikut bergoyang) */
+  @keyframes swing-cone {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    10% { transform: translateX(-50%) rotate(4deg); }
+    20% { transform: translateX(-50%) rotate(-3deg); }
+    30% { transform: translateX(-50%) rotate(2deg); }
+    40% { transform: translateX(-50%) rotate(-1.5deg); }
+    50% { transform: translateX(-50%) rotate(1deg); }
+    60% { transform: translateX(-50%) rotate(-0.8deg); }
+    70% { transform: translateX(-50%) rotate(0.5deg); }
+    80% { transform: translateX(-50%) rotate(-0.3deg); }
+    90% { transform: translateX(-50%) rotate(0.2deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
+  }
+
+  .swing-cone {
+    animation: swing-cone 2s ease-in-out;
+    transform-origin: top center;
   }
 
   /* ============================================
