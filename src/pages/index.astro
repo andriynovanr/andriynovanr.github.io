@@ -3,14 +3,13 @@ import MainLayout from '../layouts/MainLayout.astro';
 import TopBar from '../components/navigation/TopBar.astro';
 import BottomNav from '../components/navigation/BottomNav.astro';
 import HeroCard from '../components/hero/HeroCard.astro';
-import EnvelopeSection from '../components/hero/EnvelopeSection.astro';
+import PhotoCard from '../components/hero/PhotoCard.astro';
 import TestimonyPlaque from '../components/hero/TestimonyPlaque.astro';
 import CareerPlaque from '../components/sections/CareerPlaque.astro';
-import CareerExhibit from '../components/sections/CareerExhibit.astro';
-import ModalEnvelope from '../components/modals/ModalEnvelope.astro';
-import ModalSkills from '../components/modals/ModalSkills.astro';
+import CareerTimeline from '../components/sections/CareerTimeline.astro';
 import ModalContact from '../components/modals/ModalContact.astro';
 import WallClock from '../components/hud/WallClock.astro';
+import JudicialFooter from '../components/footer/JudicialFooter.astro';
 ---
 
 <MainLayout title="Andriy Novan Rahman — Court Dossier">
@@ -26,7 +25,7 @@ import WallClock from '../components/hud/WallClock.astro';
     <!-- Container untuk Photo Card dan Testimony Plaque -->
     <div class="hero-witness-container">
       <!-- Photo ID Card -->
-      <EnvelopeSection />
+      <PhotoCard />
       
       <!-- Testimony Plaque di samping kanan -->
       <TestimonyPlaque />
@@ -35,15 +34,16 @@ import WallClock from '../components/hud/WallClock.astro';
     <!-- Career & Experience Section -->
     <div class="career-section">
       <CareerPlaque />
-      <CareerExhibit />
+      <CareerTimeline />
     </div>
   </main>
+
+  <!-- Judicial Editorial Footer -->
+  <JudicialFooter />
 
   <!-- Wall Clock HUD -->
   <WallClock />
 
   <!-- Modals (hidden until triggered) -->
-  <ModalEnvelope />
-  <ModalSkills />
   <ModalContact />
 </MainLayout>

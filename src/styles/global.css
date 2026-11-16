@@ -75,10 +75,10 @@ body {
               repeating-linear-gradient(
                 90deg,
                 #6b4423 0px,
-                #7a5030 20px,
-                #6b4423 40px,
-                #5d3820 60px,
-                #6b4423 80px
+                #7a5030 8px,
+                #6b4423 16px,
+                #5d3820 24px,
+                #6b4423 32px
               );
   background-attachment: fixed;
   min-height: 100vh;
@@ -86,6 +86,24 @@ body {
   z-index: -1;
   overflow-x: hidden;
   max-width: 100vw;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* ============================================
+   DARK MODE STYLES
+   ============================================ */
+body.dark-mode {
+  /* Dark wood background - deeper mahogany tones */
+  background: linear-gradient(180deg, rgba(20, 12, 8, 0.95) 0%, rgba(15, 9, 5, 0.98) 100%),
+              repeating-linear-gradient(
+                90deg,
+                #2a1810 0px,
+                #1f120a 8px,
+                #2a1810 16px,
+                #1a0f08 24px,
+                #2a1810 32px
+              );
+  color: #d4c4a8;
 }
 
 /* ============================================
@@ -225,6 +243,7 @@ html {
   margin: 0 auto;
   position: relative;
   z-index: var(--z-content);
+  padding-bottom: 40px; /* Reduced since bottom nav is hidden */
 }
 
 /* ============================================
@@ -233,7 +252,7 @@ html {
 
 @media (max-width: 640px) {
   .page-content {
-    padding: 60px 16px 100px 16px;
+    padding: 60px 16px 40px 16px;
   }
   
   .modal-content {
@@ -243,13 +262,13 @@ html {
 
 @media (min-width: 641px) and (max-width: 1024px) {
   .page-content {
-    padding: 70px 24px 100px 24px;
+    padding: 70px 24px 50px 24px;
   }
 }
 
 @media (min-width: 1025px) {
   .page-content {
-    padding: 80px 32px 120px 32px;
+    padding: 80px 32px 60px 32px;
   }
 }
 

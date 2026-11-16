@@ -1,120 +1,219 @@
 ---
-// TopBar - Fixed top navigation with circular buttons
+// TopBar - Supreme Bench Record Top Navbar dengan Nama
 ---
 
-<header class="topbar">
-  <div class="topbar-left">
-    <button class="circle-btn purple-btn" title="Settings" aria-label="Settings">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M10 6C7.79 6 6 7.79 6 10C6 12.21 7.79 14 10 14C12.21 14 14 12.21 14 10C14 7.79 12.21 6 10 6ZM19.43 12.93L17.42 11.74C17.47 11.34 17.5 10.94 17.5 10.5C17.5 10.06 17.47 9.66 17.42 9.26L19.43 8.07C19.62 7.96 19.68 7.7 19.57 7.5L17.67 4.5C17.56 4.3 17.3 4.23 17.1 4.31L14.74 5.38C14.22 4.99 13.65 4.67 13.03 4.44L12.68 2.01C12.65 1.79 12.46 1.61 12.22 1.61H8.22C7.98 1.61 7.79 1.79 7.76 2.01L7.41 4.44C6.79 4.67 6.22 4.99 5.7 5.38L3.34 4.31C3.14 4.23 2.88 4.3 2.77 4.5L0.87 7.5C0.76 7.7 0.82 7.96 1.01 8.07L3.02 9.26C2.97 9.66 2.95 10.06 2.95 10.5C2.95 10.94 2.97 11.34 3.02 11.74L1.01 12.93C0.82 13.04 0.76 13.3 0.87 13.5L2.77 16.5C2.88 16.7 3.14 16.77 3.34 16.69L5.7 15.62C6.22 16.01 6.79 16.33 7.41 16.56L7.76 18.99C7.79 19.21 7.98 19.39 8.22 19.39H12.22C12.46 19.39 12.65 19.21 12.68 18.99L13.03 16.56C13.65 16.33 14.22 16.01 14.74 15.62L17.1 16.69C17.3 16.77 17.56 16.7 17.67 16.5L19.57 13.5C19.68 13.3 19.62 13.04 19.43 12.93Z" fill="currentColor"/>
-      </svg>
-    </button>
-    <button class="circle-btn red-btn" title="Record" aria-label="Record">
-      <div class="record-dot"></div>
-    </button>
-  </div>
-  
-  <div class="topbar-right">
+<header class="supreme-navbar">
+  <div class="navbar-container">
+    <!-- Nama Utama di Kiri -->
+    <h1 class="main-name">ANDRIY NOVAN RAHMAN</h1>
+    
+    <!-- Menu Navigation di Kanan -->
+    <nav class="top-nav-menu">
+      <a href="#hero" class="top-nav-item">
+        <div class="top-nav-icon home-icon">
+          <img src="/icons/icon_home.png" alt="Home" class="top-nav-img" />
+        </div>
+        <span class="top-nav-label">HOME</span>
+      </a>
+
+      <a href="/documents/Andriy Novan Rahman_CV.pdf" target="_blank" rel="noopener noreferrer" class="top-nav-item">
+        <div class="top-nav-icon resume-icon">
+          <img src="/icons/icon_resume.png" alt="Resume" class="top-nav-img" />
+        </div>
+        <span class="top-nav-label">RESUME</span>
+      </a>
+
+      <a href="https://github.com/andriynovanr" target="_blank" rel="noopener noreferrer" class="top-nav-item">
+        <div class="top-nav-icon github-icon">
+          <img src="/icons/icon_github.png" alt="GitHub" class="top-nav-img" />
+        </div>
+        <span class="top-nav-label">GITHUB</span>
+      </a>
+    </nav>
   </div>
 </header>
 
 <style>
-  .topbar {
+  /* ============================================
+     SUPREME BENCH RECORD TOP NAVBAR
+     ============================================ */
+  .supreme-navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 50px;
-    background: transparent;
+    height: 68px;
+    background: linear-gradient(180deg, #26160a 0%, #1c0e05 100%);
+    border-bottom: 3px solid #120803;
+    border-top: 1px solid #3d2413;
+    box-shadow: 
+      0 4px 0px 0px #0c0502,
+      0 8px 16px rgba(0, 0, 0, 0.45);
+    z-index: 50;
+    padding: 0 24px;
+  }
+
+  .navbar-container {
+    max-width: 1400px;
+    height: 100%;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
-    z-index: var(--z-nav);
   }
 
-  .topbar-left,
-  .topbar-right {
+  /* ============================================
+     NAMA UTAMA (Left Aligned)
+     ============================================ */
+  .main-name {
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    color: #f8f5eb;
+    text-shadow: 1.5px 1.5px 0px #0f0703;
+    margin: 0;
+    line-height: 1;
+  }
+
+  /* ============================================
+     TOP NAVIGATION MENU (Right Side)
+     ============================================ */
+  .top-nav-menu {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 24px;
   }
 
-  .circle-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 3px solid var(--color-wood-dark);
+  .top-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+
+  .top-nav-item:hover {
+    transform: translateY(-2px);
+  }
+
+  .top-nav-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    overflow: hidden;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    color: white;
   }
 
-  .circle-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+  .top-nav-img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    transition: transform 0.2s ease;
   }
 
-  .purple-btn {
-    background: linear-gradient(135deg, #8b6b9e 0%, #6b5080 100%);
+  .home-icon {
+    background: transparent;
+    box-shadow: none;
   }
 
-  .red-btn {
-    background: linear-gradient(135deg, #c44e4e 0%, #a03838 100%);
+  .resume-icon {
+    background: #bfa770;
+    border: 3px solid #000000;
   }
 
-  .yellow-btn {
-    background: linear-gradient(135deg, #e8c547 0%, #d4b030 100%);
-    color: var(--color-ink);
+  .github-icon {
+    background: #2a2c2c;
+    box-shadow: 0 3px 0 #1a1a1a;
+    border: 3px solid #000000;
+    border-radius: 8px;
   }
 
-  .record-dot {
-    width: 14px;
-    height: 14px;
-    background: white;
-    border-radius: 50%;
+  .top-nav-item:hover .top-nav-img {
+    transform: scale(1.08);
   }
 
-  /* Responsive adjustments */
-  @media (max-width: 640px) {
-    .topbar {
-      padding: 0 12px;
-      height: 48px;
+  .top-nav-item:hover .resume-icon {
+    background: #ccb682;
+  }
+
+  .top-nav-item:hover .github-icon {
+    background: #393d3d;
+    box-shadow: 0 5px 0 #1a1a1a;
+  }
+
+  .top-nav-label {
+    font-size: 8px;
+    font-weight: bold;
+    font-family: 'VT323', monospace;
+    color: #f4cd58;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+
+  /* ============================================
+     RESPONSIVE ADJUSTMENTS
+     ============================================ */
+  @media (max-width: 768px) {
+    .supreme-navbar {
+      height: 60px;
+      padding: 0 16px;
     }
 
-    .circle-btn {
-      width: 32px;
-      height: 32px;
+    .main-name {
+      font-size: 16px;
     }
 
-    .topbar-left,
-    .topbar-right {
-      gap: 8px;
+    .top-nav-menu {
+      gap: 18px;
+    }
+
+    .top-nav-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .top-nav-img {
+      width: 56px;
+      height: 56px;
+    }
+
+    .top-nav-label {
+      font-size: 7px;
     }
   }
 
   @media (max-width: 480px) {
-    .topbar {
-      padding: 0 8px;
+    .supreme-navbar {
+      height: 56px;
+      padding: 0 12px;
     }
 
-    .circle-btn {
-      width: 30px;
-      height: 30px;
+    .main-name {
+      font-size: 13px;
     }
 
-    .circle-btn svg {
-      width: 14px;
-      height: 14px;
+    .top-nav-menu {
+      gap: 12px;
     }
 
-    .topbar-left,
-    .topbar-right {
-      gap: 6px;
+    .top-nav-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .top-nav-img {
+      width: 48px;
+      height: 48px;
+    }
+
+    .top-nav-label {
+      font-size: 6px;
     }
   }
 </style>

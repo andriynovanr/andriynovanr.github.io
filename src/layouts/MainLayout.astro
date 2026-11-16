@@ -51,8 +51,8 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
 
       /* Bilah papan kayu vertikal lebar dengan efek silinder */
       .upper-wall-plank {
-        min-width: 145px;
-        width: 145px;
+        min-width: 80px;
+        width: 80px;
         height: 100%;
         flex-shrink: 0;
         position: relative;
@@ -69,6 +69,25 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
           #5A2E12 82%,
           #42210D 92%,
           #361B09 100%
+        );
+        transition: background 0.5s ease;
+      }
+
+      /* Dark mode untuk upper wall plank */
+      body.dark-mode .upper-wall-plank {
+        background: linear-gradient(
+          to right,
+          #1a0e06 0%,
+          #201108 8%,
+          #27140a 18%,
+          #2d170c 28%,
+          #311a0e 40%,
+          #351c10 50%,
+          #381e11 60%,
+          #311a0e 72%,
+          #2d170c 82%,
+          #201108 92%,
+          #180c05 100%
         );
       }
 
@@ -130,6 +149,19 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         justify-content: flex-start;
         border-bottom: 4px solid #1A0F07;
         overflow: visible;
+        transition: background 0.5s ease;
+      }
+
+      /* Dark mode untuk panel tengah */
+      body.dark-mode .wood-panel-middle-bg {
+        background: linear-gradient(
+          180deg,
+          #2f1809 0%,
+          #351a0a 25%,
+          #3a1d0b 50%,
+          #3e1f0c 75%,
+          #3a1d0b 100%
+        );
       }
 
       .wood-plank-middle {
@@ -168,6 +200,7 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: background 0.5s ease;
       }
 
       .partition-posts-bg {
@@ -187,6 +220,7 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         border: 2px solid #1A0F07;
         border-radius: 2px;
         flex-shrink: 0;
+        transition: background 0.5s ease;
       }
 
       /* Semua jepitan (corner dan tengah) dalam satu flex container untuk jarak sama rata */
@@ -198,6 +232,7 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         border: 2px solid #1A0F07;
         border-radius: 2px;
         flex-shrink: 0;
+        transition: background 0.5s ease;
       }
 
       /* Responsive untuk mobile */
@@ -220,7 +255,7 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         }
       }
 
-      /* ZONA 4: Lantai Biru Toska - Courtroom Floor (802px - extends to page bottom) */
+      /* ZONA 4: Lantai Biru Toska - Courtroom Floor (802px - limited before footer) */
       .courtroom-floor-bg {
         position: absolute;
         top: 802px;
@@ -228,8 +263,8 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         right: 0;
         width: 100%;
         min-width: 100%;
-        height: calc(100% - 802px);
-        min-height: calc(100vh - 802px);
+        height: 1200px;
+        max-height: none;
         background: linear-gradient(
           180deg,
           #1E535F 0%,
@@ -237,7 +272,38 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
           #2A6D7C calc(100% - 4px),
           #245C69 100%
         );
-        border-bottom: 4px solid #1C0E05;
+        transition: background 0.5s ease;
+      }
+      
+      /* ============================================
+         DARK MODE STYLES FOR ALL ZONES
+         ============================================ */
+      
+      /* Dark mode untuk balok krem */
+      body.dark-mode .gallery-partition-bg {
+        background: linear-gradient(
+          180deg,
+          #4a4235 0%,
+          #433c31 50%,
+          #3c362c 100%
+        );
+      }
+      
+      body.dark-mode .post-item-bg,
+      body.dark-mode .post-item-corner-left,
+      body.dark-mode .post-item-corner-right {
+        background: #3a3528;
+      }
+      
+      /* Dark mode untuk lantai toska */
+      body.dark-mode .courtroom-floor-bg {
+        background: linear-gradient(
+          180deg,
+          #0f2a31 0%,
+          #153842 6px,
+          #153842 calc(100% - 4px),
+          #122f36 100%
+        );
       }
     </style>
   </head>
@@ -246,6 +312,36 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
     <div class="courtroom-backgrounds-wrapper">
       <!-- ZONA 1: Dinding Kayu Atas (0-510px) -->
       <div class="courtroom-upper-wall-bg">
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
+        <div class="upper-wall-plank"></div>
         <div class="upper-wall-plank"></div>
         <div class="upper-wall-plank"></div>
         <div class="upper-wall-plank"></div>
@@ -331,6 +427,41 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
         <div class="wood-plank-middle"></div>
         <div class="wood-plank-middle"></div>
         <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
+        <div class="wood-plank-middle"></div>
       </div>
 
       <!-- ZONA 3: Balok Krem (630-682px) -->
@@ -364,14 +495,8 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
   import Alpine from 'alpinejs';
 
   Alpine.data('portfolioApp', () => ({
-    showEnvelopeModal: false,
-    showSkillsModal: false,
     showContactModal: false,
-    showProjectModal: false,
-    currentProjectIndex: 0,
-    isSoundOn: true,
-    sanityLevel: 85,
-    activeCareerTab: 2,
+    darkMode: false,
 
     init() {
       document.addEventListener('keydown', (e) => {
@@ -384,52 +509,53 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
       window.addEventListener('close-modal', () => {
         this.closeAllModals();
       });
+
+      // Listen for lamp toggle event with proper typing
+      window.addEventListener('lamp-toggle', ((e: CustomEvent<{ lampOn: boolean }>) => {
+        this.darkMode = !e.detail.lampOn;
+        if (this.darkMode) {
+          document.body.classList.add('dark-mode');
+        } else {
+          document.body.classList.remove('dark-mode');
+        }
+      }) as EventListener);
     },
 
     openModal(name: string) {
       this.closeAllModals();
-      if (name === 'envelope') this.showEnvelopeModal = true;
-      if (name === 'skills') this.showSkillsModal = true;
       if (name === 'contact') this.showContactModal = true;
-      if (name === 'project') this.showProjectModal = true;
     },
 
     closeAllModals() {
-      this.showEnvelopeModal = false;
-      this.showSkillsModal = false;
       this.showContactModal = false;
-      this.showProjectModal = false;
-    },
-
-    toggleSound() {
-      this.isSoundOn = !this.isSoundOn;
-    },
-
-    setCareerTab(tab: number) {
-      this.activeCareerTab = tab;
     }
   }));
 
   Alpine.start();
   
-  // Adjust background wrapper height to match page content (with extra padding for zoom out)
+  // Adjust background wrapper and floor height to stop before footer
   function adjustBackgroundHeight() {
     const body = document.body;
-    const pageContent = document.querySelector('.page-content');
-    const bgWrapper = document.querySelector('.courtroom-backgrounds-wrapper');
+    const pageContent = document.querySelector('.page-content') as HTMLElement | null;
+    const footer = document.querySelector('.judicial-footer') as HTMLElement | null;
+    const bgWrapper = document.querySelector('.courtroom-backgrounds-wrapper') as HTMLElement | null;
+    const floorBg = document.querySelector('.courtroom-floor-bg') as HTMLElement | null;
     
-    if (pageContent && bgWrapper) {
+    if (pageContent && footer && bgWrapper && floorBg) {
       const contentHeight = pageContent.offsetHeight;
+      const footerTop = contentHeight; // Footer starts right after content
       const viewportHeight = window.innerHeight;
       
-      // Calculate proper height: content + padding, with 2x multiplier for zoom out coverage
-      const calculatedHeight = Math.max(contentHeight + 200, viewportHeight);
-      const finalHeight = calculatedHeight * 2; // 2x untuk cover zoom out 50%, 33%, 25%
+      // Background wrapper should cover content area only (not footer)
+      const wrapperHeight = Math.max(footerTop, viewportHeight);
+      bgWrapper.style.height = wrapperHeight + 'px';
       
-      bgWrapper.style.height = finalHeight + 'px';
+      // Floor background stops before footer (802px to footer start)
+      const floorHeight = Math.max(footerTop - 802, viewportHeight - 802);
+      floorBg.style.height = floorHeight + 'px';
       
-      // Set body height to match content + padding only (no extra scroll)
-      body.style.height = (contentHeight + 200) + 'px';
+      // Body height is natural (content + footer)
+      body.style.height = 'auto';
     }
   }
   
