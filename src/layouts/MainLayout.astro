@@ -497,6 +497,7 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
   Alpine.data('portfolioApp', () => ({
     showContactModal: false,
     darkMode: false,
+    activeCareerTab: 2,
 
     init() {
       document.addEventListener('keydown', (e) => {
@@ -528,6 +529,10 @@ const { title = 'Andriy Novan Rahman — Court Dossier' } = Astro.props;
 
     closeAllModals() {
       this.showContactModal = false;
+    },
+
+    setCareerTab(tab: number) {
+      this.activeCareerTab = tab;
     }
   }));
 
