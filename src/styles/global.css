@@ -243,6 +243,7 @@ html {
   margin: 0 auto;
   position: relative;
   z-index: var(--z-content);
+  padding-bottom: 40px; /* Reduced since bottom nav is hidden */
 }
 
 /* ============================================
@@ -251,7 +252,7 @@ html {
 
 @media (max-width: 640px) {
   .page-content {
-    padding: 60px 16px 100px 16px;
+    padding: 60px 16px 40px 16px;
   }
   
   .modal-content {
@@ -261,13 +262,13 @@ html {
 
 @media (min-width: 641px) and (max-width: 1024px) {
   .page-content {
-    padding: 70px 24px 100px 24px;
+    padding: 70px 24px 50px 24px;
   }
 }
 
 @media (min-width: 1025px) {
   .page-content {
-    padding: 80px 32px 120px 32px;
+    padding: 80px 32px 60px 32px;
   }
 }
 
